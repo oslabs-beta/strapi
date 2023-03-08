@@ -1,2 +1,0 @@
-# strapi
-Description for StrAPI
