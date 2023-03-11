@@ -1,0 +1,64 @@
+:root {
+  --bg-darkest: #2c3333;
+  --bg-darkgreen: #2e4f4f;
+  --bg-teal: #0e8388;
+  --bg-light: #cbe4de;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*,
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: rgb(225, 225, 225);
+  font-family: arial;
+}
+
+.container {
+  background-color: #2e4f4f;
+  /* background-image: url('../../public/bg4.png');
+  background-position: cover;
+  background-repeat: no-repeat;
+  background-size: cover; */
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* ------------------------------ */
+/* ---------- 404 page ---------- */
+/* ------------------------------ */
+
+.notFound {
+  margin-top: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+}
+
+.h1,
+.h2 {
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+}
+
+.h1 {
+  font-size: 4rem;
+}
+
+.h2 {
+  font-size: 2rem;
+}

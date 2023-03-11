@@ -28,6 +28,7 @@
 # local env files
 /client/.env*.local
 /client/.env
+/client/next-env.d.ts
 
 # vercel
 /client/.vercel
