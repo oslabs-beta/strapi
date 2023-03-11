@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header className={`${styles.header} ${utilStyles.bgDarkest}`}>
       <Link href="/" className={`${styles.hero} ${styles.link}`}>
-        <Image src="/logo.png" width={50} height={50} />
+        <Image src="/logo.png" alt="strAPI logo" width={50} height={50} />
         <h1>strAPI</h1>
       </Link>
       <nav className={styles.nav}>

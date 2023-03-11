@@ -15,6 +15,7 @@ export default function Home() {
       <main className={styles.homeContainer}>
         <Image
           src="/logo.png"
+          alt="strAPI logo"
           height={250}
           width={250}
           className={styles.logo}
