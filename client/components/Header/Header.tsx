@@ -6,7 +6,9 @@ import Image from 'next/image';
 
 const Header = () => {
   return (
-    <header className={`${styles.header} ${utilStyles.bgDarkest}`}>
+    <header
+      className={`${styles.header} ${utilStyles.bgDarkest} ${utilStyles.navBoxShadow}`}
+    >
       <Link href="/" className={`${styles.hero} ${styles.link}`}>
         <Image src="/logo.png" alt="strAPI logo" width={50} height={50} />
         <h1>strAPI</h1>

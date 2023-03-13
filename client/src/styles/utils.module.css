@@ -22,3 +22,7 @@
   background-color: #0e8388;
   color: #2c3333;
 }
+
+.navBoxShadow {
+  box-shadow: 0 0 5px 0 #cbe4de;
+}

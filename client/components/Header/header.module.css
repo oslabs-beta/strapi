@@ -5,6 +5,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  z-index: 2;
 }
 
 .hero {
