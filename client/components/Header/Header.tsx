@@ -25,6 +25,7 @@ const Header = () => {
         </Link>
         <Link className={styles.link} href="/login">
           <button
+            disabled
             className={`${styles.signin} ${utilStyles.bgDarkgreen} ${utilStyles.btnBoxShadow}`}
           >
             Sign In or Sign Up
