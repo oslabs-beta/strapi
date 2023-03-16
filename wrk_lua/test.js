@@ -13,7 +13,7 @@ export function createLua(params) {
   `
     );
     if (params[i].body) {
-      luaFile.push(`body = "${params[i].body}"\n`);
+      luaFile.push(`body = ${JSON.stringify(params[i].body)}\n`);
     }
     luaFile.push(`return wrk.format("${params[i].method}", "${params[i].route}", headers, body)
   end\n\n`);
@@ -51,38 +51,12 @@ end`);
 }
 
 export function createBash(constants) {
+  console.log(constants);
   const bashFile = `#!/bin/bash
 ulimit -n 65535
-wrk -t${constants.threads} -c${constants.connections} -d${constants.test_duration} -s example.lua ${constants.rootUrl}
-
-# Set executable permission for this script
-chmod +x "$0"`;
+wrk -t${constants.numOfThreads} -c${constants.numOfUsers} -d${constants.testDuration} -s example.lua ${constants.rootUrl}`;
   fs.writeFile('my_script.sh', `${bashFile}`, (err) => {
     if (err) throw err;
     console.log('The Bash file has been saved!');
   });
 }
-
-// const jsonCode = [
-//   {
-//     threads: 4,
-//     test_duration: 10,
-//     HTTP_request_density: 500,
-//     connections: 5,
-//     HTTP_root_URL: 'http://localhost:3333',
-//   },
-//   {
-//     HTTP_Request_URL: 'https://google.com',
-//     method: 'GET',
-//     route: '/',
-//     ratio: 1,
-//   },
-//   {
-//     HTTP_Request_URL: 'https://google.com',
-//     method: 'POST',
-//     content_type: 'application/x-www-form-urlencoded',
-//     body: 'item=tom+cat',
-//     route: '/addTask',
-//     ratio: 2,
-//   },
-// ];

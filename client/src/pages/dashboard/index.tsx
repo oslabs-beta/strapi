@@ -4,8 +4,6 @@ import styles from './dashboard.module.css';
 import utilStyles from '../../styles/utils.module.css';
 import DashLayout from './layout';
 import { useState } from 'react';
-import {createLua, createBash} from '../../../../wrk_lua/test';
-import runScript from '../../../../wrk_lua/run_script'
 
 
 type InitialConstants = {
@@ -51,8 +49,25 @@ const index = () => {
   const startTest = async (): Promise<void> => {
     console.log('constants: ', constants);
     console.log('params: ', params);
-    createLua(methods)
-    createBash(constants)
+    const responseBash = await fetch('/api/createBash', {
+      method: 'POST',
+      body: JSON.stringify(constants),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseLua = await fetch('/api/createLua', {
+      method: 'POST',
+      body: JSON.stringify(methods),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const runScript = await fetch('/api/execScript', {
+      method: 'GET',
+    })
   };
 
   const rawOrEncoded = (button: any) => {
@@ -176,10 +191,14 @@ const index = () => {
               <h3>POST Request Body:</h3>
               <p>(Must be in JSON format)</p>
               <textarea
+                style={{
+                  color: "black",
+                  fontSize: "1rem",
+                }}
                 onChange={(e: any) =>
                   setParams({
                     ...params,
-                    body: encodeURI(e.target.value),
+                    body: e.target.value,
                   })
                 }
                 placeholder={`{ "key": "value", "firstName": "Steven" }`}
