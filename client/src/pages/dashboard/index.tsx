@@ -4,6 +4,9 @@ import styles from './dashboard.module.css';
 import utilStyles from '../../styles/utils.module.css';
 import DashLayout from './layout';
 import { useState } from 'react';
+import {createLua, createBash} from '../../../../wrk_lua/test';
+import runScript from '../../../../wrk_lua/run_script'
+
 
 type InitialConstants = {
   rootUrl: string;
@@ -20,6 +23,8 @@ type InitialParams = {
   ratio: number;
 };
 
+type InitialMethods = InitialParams[];
+
 const index = () => {
   const initialConstants: InitialConstants = {
     rootUrl: '',
@@ -35,18 +40,28 @@ const index = () => {
     contentType: 'application/json',
     ratio: 1,
   };
+
+  const initialMethods: InitialMethods = [];
+
   const [constants, setConstants] = useState(initialConstants);
   const [params, setParams] = useState(initialParams);
   const [isPost, setIsPost] = useState(false);
+  const [methods, setMethods] = useState(initialMethods);
 
-  const startTest = (): void => {
+  const startTest = async (): Promise<void> => {
     console.log('constants: ', constants);
     console.log('params: ', params);
+    createLua(methods)
+    createBash(constants)
   };
 
   const rawOrEncoded = (button: any) => {
     console.log(button);
   };
+
+  const addMethod = () => {
+    setMethods(methods.concat(params));
+  }
 
   return (
     <DashLayout>
@@ -176,7 +191,7 @@ const index = () => {
             </div>
           ) : null}
 
-          <button className={`${styles.btnAddParam} ${utilStyles.bgTeal}`}>
+          <button onClick={()=>addMethod()} className={`${styles.btnAddParam} ${utilStyles.bgTeal}`} type="button">
             Add Method
           </button>
         </form>
