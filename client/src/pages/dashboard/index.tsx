@@ -5,6 +5,7 @@ import utilStyles from '../../styles/utils.module.css';
 import DashLayout from './layout';
 import { useState } from 'react';
 
+
 type InitialConstants = {
   rootUrl: string;
   numOfThreads: number;
@@ -19,6 +20,8 @@ type InitialParams = {
   contentType: 'application/json';
   ratio: number;
 };
+
+type InitialMethods = InitialParams[];
 
 const index = () => {
   const initialConstants: InitialConstants = {
@@ -35,18 +38,45 @@ const index = () => {
     contentType: 'application/json',
     ratio: 1,
   };
+
+  const initialMethods: InitialMethods = [];
+
   const [constants, setConstants] = useState(initialConstants);
   const [params, setParams] = useState(initialParams);
   const [isPost, setIsPost] = useState(false);
+  const [methods, setMethods] = useState(initialMethods);
 
-  const startTest = (): void => {
+  const startTest = async (): Promise<void> => {
     console.log('constants: ', constants);
     console.log('params: ', params);
+    const responseBash = await fetch('/api/createBash', {
+      method: 'POST',
+      body: JSON.stringify(constants),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseLua = await fetch('/api/createLua', {
+      method: 'POST',
+      body: JSON.stringify(methods),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const runScript = await fetch('/api/execScript', {
+      method: 'GET',
+    })
   };
 
   const rawOrEncoded = (button: any) => {
     console.log(button);
   };
+
+  const addMethod = () => {
+    setMethods(methods.concat(params));
+  }
 
   return (
     <DashLayout>
@@ -161,10 +191,14 @@ const index = () => {
               <h3>POST Request Body:</h3>
               <p>(Must be in JSON format)</p>
               <textarea
+                style={{
+                  color: "black",
+                  fontSize: "1rem",
+                }}
                 onChange={(e: any) =>
                   setParams({
                     ...params,
-                    body: encodeURI(e.target.value),
+                    body: e.target.value,
                   })
                 }
                 placeholder={`{ "key": "value", "firstName": "Steven" }`}
@@ -176,7 +210,7 @@ const index = () => {
             </div>
           ) : null}
 
-          <button className={`${styles.btnAddParam} ${utilStyles.bgTeal}`}>
+          <button onClick={()=>addMethod()} className={`${styles.btnAddParam} ${utilStyles.bgTeal}`} type="button">
             Add Method
           </button>
         </form>

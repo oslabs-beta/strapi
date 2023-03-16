@@ -32,3 +32,9 @@
 
 # vercel
 /client/.vercel
+
+# script files
+/client/my_script.sh
+
+# example lua file
+/client/example.lua
