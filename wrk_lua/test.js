@@ -23,9 +23,9 @@ export function createLua(params) {
     while (r > 0) {
       luaFile.push(`requests[${reqCounter++}] = request${i}\n`);
       r--;
+      sumOfRatio++;
     }
 
-    sumOfRatio += params[i].ratio;
     luaFile.push('\n');
   }
 
@@ -42,7 +42,6 @@ response = function(status, headers, body)
     io.write(body .. "\\n")
   end
 end`);
-
   let stringifyArr = luaFile.join('');
   fs.writeFile('example.lua', `${stringifyArr}`, (err) => {
     if (err) throw err;
