@@ -6,9 +6,9 @@ export default async function scripts(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    console.log(req.body)
+    console.log(req.body);
     const bashCreated = createBash(req.body);
-    res.status(200).send('bash file created successfully!')
+    res.status(200).send('bash file created successfully!');
   } else {
     res.status(400).send('Invalid request method');
   }

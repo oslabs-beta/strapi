@@ -5,7 +5,6 @@ import utilStyles from '../../styles/utils.module.css';
 import DashLayout from './layout';
 import { useState } from 'react';
 
-
 type InitialConstants = {
   rootUrl: string;
   numOfThreads: number;
@@ -22,6 +21,8 @@ type InitialParams = {
 };
 
 type InitialMethods = InitialParams[];
+
+type ratioSum = number;
 
 const index = () => {
   const initialConstants: InitialConstants = {
@@ -41,10 +42,13 @@ const index = () => {
 
   const initialMethods: InitialMethods = [];
 
+  const initialRatioSum: ratioSum = 0;
+
   const [constants, setConstants] = useState(initialConstants);
   const [params, setParams] = useState(initialParams);
   const [isPost, setIsPost] = useState(false);
   const [methods, setMethods] = useState(initialMethods);
+  const [ratioSum, setRatioSum] = useState(initialRatioSum);
 
   const startTest = async (): Promise<void> => {
     console.log('constants: ', constants);
@@ -67,16 +71,25 @@ const index = () => {
 
     const runScript = await fetch('/api/execScript', {
       method: 'GET',
-    })
+    });
   };
 
-  const rawOrEncoded = (button: any) => {
-    console.log(button);
-  };
+  // const rawOrEncoded = (button: any) => {
+  //   console.log(button);
+  // };
 
   const addMethod = () => {
+    setRatioSum(Number(ratioSum) + Number(params.ratio));
     setMethods(methods.concat(params));
-  }
+  };
+
+  const deleteMethod = (el: any) => {
+    const idx = el.id;
+    setRatioSum(Number(ratioSum) - Number(methods[idx].ratio));
+    const newMethods = methods;
+    newMethods.splice(idx, 1);
+    setMethods([...newMethods]);
+  };
 
   return (
     <DashLayout>
@@ -88,6 +101,31 @@ const index = () => {
         <button onClick={() => startTest()} className={styles.btnStartTest}>
           Submit
         </button>
+        <section className={styles.currentMethods}>
+          <h1>Current Methods:</h1>
+          <ul className={styles.methodLst}>
+            {methods.map((method, index) => {
+              return (
+                <li id={index.toString()} className={styles.listItem}>
+                  <p className={styles.routeDisplay}>{method.route}</p>
+                  <p>{method.method}</p>
+                  {/* <p>{method.method === 'POST' ? method.body : null}</p> */}
+                  {method.method === 'POST' ? <p>method.body</p> : null}
+                  <p>
+                    {method.ratio}:{ratioSum}
+                  </p>
+                  <button
+                    id={index.toString()}
+                    onClick={(e) => deleteMethod(e.target)}
+                    className={styles.deleteMethod}
+                  >
+                    X
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
         <form id="testing-constants" className={styles.inputDataForm}>
           <h1 className={styles.h1}>Testing Constants:</h1>
           <label>Root URL:</label>
@@ -192,8 +230,8 @@ const index = () => {
               <p>(Must be in JSON format)</p>
               <textarea
                 style={{
-                  color: "black",
-                  fontSize: "1rem",
+                  color: 'black',
+                  fontSize: '1rem',
                 }}
                 onChange={(e: any) =>
                   setParams({
@@ -210,7 +248,11 @@ const index = () => {
             </div>
           ) : null}
 
-          <button onClick={()=>addMethod()} className={`${styles.btnAddParam} ${utilStyles.bgTeal}`} type="button">
+          <button
+            onClick={() => addMethod()}
+            className={`${styles.btnAddParam} ${utilStyles.bgTeal}`}
+            type="button"
+          >
             Add Method
           </button>
         </form>
