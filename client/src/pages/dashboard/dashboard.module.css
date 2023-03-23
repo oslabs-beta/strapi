@@ -30,6 +30,32 @@
   cursor: pointer;
 }
 
+.currentMethods {
+  grid-column: 1 / span 2;
+  width: 50%;
+}
+
+.methodList {
+  list-style-type: disc;
+}
+
+.listItem {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.routeDisplay {
+  overflow-x: hidden;
+}
+
+.deleteMethod {
+  color: white;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .inputDataForm {
   display: flex;
   gap: 15px;

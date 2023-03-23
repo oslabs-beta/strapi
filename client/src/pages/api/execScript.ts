@@ -8,7 +8,7 @@ export default async function scripts(
 ) {
   if (req.method === 'GET') {
     runScript(req, res);
-    res.status(200).send('Script executing...')
+    // res.status(200).send('Script executing...')
   } else {
     res.status(400).send('Invalid request method');
   }
