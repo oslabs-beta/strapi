@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --bg-darkest: #2c3333;
   --bg-darkgreen: #2e4f4f;
@@ -53,6 +57,7 @@ body {
 .h1,
 .h2 {
   font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  font-size: 100px;
 }
 
 .h1 {
