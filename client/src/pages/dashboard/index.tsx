@@ -10,6 +10,7 @@ type InitialConstants = {
   numOfThreads: number;
   testDuration: number;
   numOfUsers: number;
+  throughput: number;
 };
 
 type InitialParams = {
@@ -27,9 +28,10 @@ type ratioSum = number;
 const index = () => {
   const initialConstants: InitialConstants = {
     rootUrl: '',
-    numOfThreads: 1,
+    numOfThreads: 2,
     testDuration: 60,
-    numOfUsers: 1,
+    numOfUsers: 50,
+    throughput: 100
   };
 
   const initialParams: InitialParams = {
@@ -147,6 +149,17 @@ const index = () => {
             className={styles.input}
             type="text"
             placeholder="1"
+          />
+          <label>Throughput (requests/sec):</label>
+          <input
+            onChange={(e: any) =>
+              setConstants({ ...constants, throughput: e.target.value })
+            }
+            value={constants.throughput}
+            id="connections"
+            className={styles.input}
+            type="text"
+            placeholder="100"
           />
         </form>
 

@@ -38,3 +38,6 @@
 
 # wrkScript lua file
 /client/wrkScript.lua
+
+# result txt file 
+/client/result.txt
