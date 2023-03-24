@@ -34,7 +34,10 @@
 /client/.vercel
 
 # script files
-/client/my_script.sh
+/client/execWrk2Script.sh
 
-# example lua file
-/client/example.lua
+# wrkScript lua file
+/client/wrkScript.lua
+
+# result txt file 
+/client/result.txt

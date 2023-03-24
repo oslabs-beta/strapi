@@ -43,7 +43,7 @@ response = function(status, headers, body)
   end
 end`);
   let stringifyArr = luaFile.join('');
-  fs.writeFile('example.lua', `${stringifyArr}`, (err) => {
+  fs.writeFile('wrkScript.lua', `${stringifyArr}`, (err) => {
     if (err) throw err;
     console.log('The Lua file has been saved!');
   });
@@ -53,8 +53,8 @@ export function createBash(constants) {
   console.log(constants);
   const bashFile = `#!/bin/bash
 ulimit -n 65535
-wrk -t${constants.numOfThreads} -c${constants.numOfUsers} -d${constants.testDuration} -s example.lua ${constants.rootUrl}`;
-  fs.writeFile('my_script.sh', `${bashFile}`, (err) => {
+wrk2 -t${constants.numOfThreads} -c${constants.numOfUsers} -d${constants.testDuration} -s wrkScript.lua -L -R${constants.throughput} ${constants.rootUrl} > result.txt`;
+  fs.writeFile('execWrk2Script.sh', `${bashFile}`, (err) => {
     if (err) throw err;
     console.log('The Bash file has been saved!');
   });
