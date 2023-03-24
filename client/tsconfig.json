@@ -17,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../wrk_lua/run_script.ts", "../wrk_lua/test.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../wrk_lua/execScripts.ts", "../wrk_lua/luaFileGenerator.js"],
   "exclude": ["node_modules"]
 }
