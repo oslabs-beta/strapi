@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo.ico" />
       </Head>
-      <div className="container">
+      <div className=" flex flex-col items-center h-screen relative bg-slate-800">
         <Header />
         {children}
       </div>

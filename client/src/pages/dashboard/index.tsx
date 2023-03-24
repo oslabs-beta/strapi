@@ -96,36 +96,12 @@ const index = () => {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <main className={styles.inputContainer}>
+      <main className={`${styles.inputContainer} overflow-y-scroll`}>
         <h1 className={styles.h1}>Input Required Data:</h1>
         <button onClick={() => startTest()} className={styles.btnStartTest}>
           Submit
         </button>
-        <section className={styles.currentMethods}>
-          <h1>Current Methods:</h1>
-          <ul className={styles.methodLst}>
-            {methods.map((method, index) => {
-              return (
-                <li id={index.toString()} className={styles.listItem}>
-                  <p className={styles.routeDisplay}>{method.route}</p>
-                  <p>{method.method}</p>
-                  {/* <p>{method.method === 'POST' ? method.body : null}</p> */}
-                  {method.method === 'POST' ? <p>method.body</p> : null}
-                  <p>
-                    {method.ratio}:{ratioSum}
-                  </p>
-                  <button
-                    id={index.toString()}
-                    onClick={(e) => deleteMethod(e.target)}
-                    className={styles.deleteMethod}
-                  >
-                    X
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
+
         <form id="testing-constants" className={styles.inputDataForm}>
           <h1 className={styles.h1}>Testing Constants:</h1>
           <label>Root URL:</label>
@@ -250,12 +226,37 @@ const index = () => {
 
           <button
             onClick={() => addMethod()}
-            className={`${styles.btnAddParam} ${utilStyles.bgTeal}`}
+            className=" bg-slate-500 w-24 p-3 rounded-md hover:scale-110 transition-all shadow-lg shadow-slate-200"
             type="button"
           >
             Add Method
           </button>
         </form>
+        <section className={styles.currentMethods}>
+          <h1>Current Methods:</h1>
+          <ul className={styles.methodLst}>
+            {methods.map((method, index) => {
+              return (
+                <li id={index.toString()} className={styles.listItem}>
+                  <p className={styles.routeDisplay}>{method.route}</p>
+                  <p>{method.method}</p>
+                  {/* <p>{method.method === 'POST' ? method.body : null}</p> */}
+                  {method.method === 'POST' ? <p>method.body</p> : null}
+                  <p>
+                    {method.ratio}:{ratioSum}
+                  </p>
+                  <button
+                    id={index.toString()}
+                    onClick={(e) => deleteMethod(e.target)}
+                    className={styles.deleteMethod}
+                  >
+                    X
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       </main>
     </DashLayout>
   );
