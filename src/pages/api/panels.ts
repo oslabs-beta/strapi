@@ -9,7 +9,7 @@ export default async function panels(
 ) {
   const dbUrl = path.join(process.cwd(), '/src/lib/');
 
-  const METHOD: string = req.method;
+  const METHOD: string | undefined = req.method;
 
   switch (METHOD) {
     case 'GET':
@@ -47,7 +47,7 @@ export default async function panels(
       await fs.writeFile(
         dbUrl + '/grafanaUrls.json',
         JSON.stringify(newUrls)
-      )
+      );
       return res.status(200).json({ message: 'Successfully deleted panel.' });
 
     default:

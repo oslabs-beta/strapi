@@ -5,11 +5,11 @@ import Panel from '../../../components/Panel/Panel';
 import { FC } from 'react';
 
 const Metrics: FC = () => {
-  const [urls, setUrls] = useState([]);
+  const [urls, setUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [urlSrc, setUrlSrc] = useState('');
 
-  const srcRef = useRef(null);
+  const srcRef = useRef<HTMLInputElement>(null);
 
   // fetches data from /api/panels.ts. Next.js does not recommend fetching like this, but in order to get responsive state and complete our read/write operations to our JSON file, this is the best approach.
   const getData = async (): Promise<void> => {
@@ -33,7 +33,7 @@ const Metrics: FC = () => {
   const addPanel = async (): Promise<void> => {
     // console.log(srcRef.current.value);
     const body = {
-      newUrl: srcRef.current.value,
+      newUrl: srcRef?.current?.value,
     };
 
     try {
@@ -49,7 +49,7 @@ const Metrics: FC = () => {
   };
 
   const deletePanel = async (id: any): Promise<void> => {
-    //console.log("this is the id of the panel to deleted: ", id);  /////////////////
+    //console.log("this is the id of the panel to deleted: ", id);
     const body = {
       urlIndex: Number(id),
     };
@@ -60,9 +60,9 @@ const Metrics: FC = () => {
         headers: { 'Content-Type': 'Application/JSON' },
         body: JSON.stringify(body),
       });
-      getData();                                  /////////////////
+      getData();
     } catch (err) {
-      throw new Error('Unable to delete panel.'); /////////////////
+      throw new Error('Unable to delete panel.');
     }
   };
 
