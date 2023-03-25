@@ -49,6 +49,7 @@ const Metrics: FC = () => {
   };
 
   const deletePanel = async (id: any): Promise<void> => {
+    //console.log("this is the id of the panel to deleted: ", id);  /////////////////
     const body = {
       urlIndex: Number(id),
     };
@@ -59,7 +60,10 @@ const Metrics: FC = () => {
         headers: { 'Content-Type': 'Application/JSON' },
         body: JSON.stringify(body),
       });
-    } catch (err) {}
+      getData();                                  /////////////////
+    } catch (err) {
+      throw new Error('Unable to delete panel.'); /////////////////
+    }
   };
 
   return (
