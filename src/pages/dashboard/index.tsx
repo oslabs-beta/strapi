@@ -22,7 +22,6 @@ type InitialParams = {
 };
 
 type InitialMethods = InitialParams[];
-
 type ratioSum = number;
 
 const index = () => {
@@ -71,9 +70,9 @@ const index = () => {
       },
     });
 
-    const runScript = await fetch('/api/execScript', {
-      method: 'GET',
-    });
+    const runScript = await fetch('/api/execScript');
+
+    // const makeHistogram = await fetch('api/createHistogram')
   };
 
   // const rawOrEncoded = (button: any) => {
@@ -254,7 +253,7 @@ const index = () => {
                   <p className={styles.routeDisplay}>{method.route}</p>
                   <p>{method.method}</p>
                   {/* <p>{method.method === 'POST' ? method.body : null}</p> */}
-                  {method.method === 'POST' ? <p>method.body</p> : null}
+                  {method.method === 'POST' ? <p>{method.body}</p> : null}
                   <p>
                     {method.ratio}:{ratioSum}
                   </p>
@@ -270,6 +269,7 @@ const index = () => {
             })}
           </ul>
         </section>
+        <div id="myPlotDiv"></div>
       </main>
     </DashLayout>
   );

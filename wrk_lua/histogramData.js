@@ -1,23 +1,35 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import Histogram from '../../../wrk_lua/histogramData';
 import fs from 'fs';
+import { useEffect, useRef, useState} from 'react';
+// import Plotly from 'plotly-nodejs';
 
-export default async function histogram(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default function Histogram() {
+  // const [plotData, setPlotData] = useState(null);
+  const layout = {
+    title: 'My Line Plot',
+    xaxis: {
+      title: 'X Axis Label',
+      tickvals: [0, 90, 99, 99.9],
+      ticktext: ['%'],
+    },
+    yaxis: {
+      title: 'Y Axis Label',
+    },
+  };
+  // const chartRef = useRef(null);
   fs.readFile('result.txt', (err, data) => {
     if (err) throw err;
     const yValues = [];
     const xValues = [];
-    // Split the data into an array of lines
     const dataStr = data.toString();
+    console.log(dataStr)
+    // Split the data into an array of lines
     const lines = dataStr.split('\n');
+    console.log('lines: ', lines);
     // Find the column headings
     const headingLineIndex = lines.findIndex((line) =>
       line.startsWith('       Value ')
     );
-    const headings = lines[headingLineIndex].trim().split(/\s+/);
+    // const headings = lines[headingLineIndex].trim().split(/\s+/);
 
     const endOfValuesIndex = lines.findIndex((line) =>
       line.startsWith('#[Mean')
@@ -43,29 +55,23 @@ export default async function histogram(
     // console.log('percentileRank: ', percentileRank);
 
     // // Create the histogram chart
-    const trace =[{
-      x: xValues,
-      y: yValues,
-      type: 'scatter',
-    }];
-
-    const layout = {
-      title: 'My Line Plot',
-      xaxis: {
-        title: 'X Axis Label',
-        tickvals: [0, 90, 99, 99.9],
-        ticktext: ['%'],
+    const plotData = [
+      {
+        x: xValues,
+        y: yValues,
+        type: 'scatter',
       },
-      yaxis: {
-        title: 'Y Axis Label',
-      },
-    };
-    // const chartLayout = {
-    //   title: 'Latency by Percentile Distribution',
-    //   xaxis: { title: 'Percentile' },
-    //   yaxis: { title: 'Latency (ms)' },
-    // };
-    Plotly.newPlot('myPlotDiv', trace, layout);
-    // Plotly.newPlot(chartRef.current, chartData, chartLayout);
+    ];
   });
+  // console.log(chartRef);
+  // return chartRef;
 }
+const result = Histogram();
+
+
+
+// Next, create a trace object with the x and y values
+
+// Create a data array with the trace object
+
+// Finally, create a layout object with any additional styling or configuration options
