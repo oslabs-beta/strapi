@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { createBash } from '../../../../wrk_lua/luaFileGenerator';
+import { createLua } from '../../../wrk_lua/luaFileGenerator';
 
 export default async function scripts(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    createBash(req.body);
-    res.status(200).send('bash file created successfully!');
+    createLua(req.body);
+    res.status(200).send('lua file created successfully!');
   } else {
     res.status(400).send('Invalid request method');
   }
