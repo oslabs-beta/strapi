@@ -8,8 +8,8 @@ export default function Histogram() {
     title: 'My Line Plot',
     xaxis: {
       title: 'X Axis Label',
-      tickvals: [0, 90, 99, 99.9],
-      ticktext: ['%'],
+      tickvals: [90, 99, 99.9],
+      ticktext: ['90%','99%','99.9%',],
     },
     yaxis: {
       title: 'Y Axis Label',
@@ -18,6 +18,7 @@ export default function Histogram() {
   // const chartRef = useRef(null);
   fs.readFile('result.txt', (err, data) => {
     if (err) throw err;
+    if (!data.length) throw err;
     const yValues = [];
     const xValues = [];
     const dataStr = data.toString();
@@ -45,7 +46,7 @@ export default function Histogram() {
       const values = line.trim().split(/\s+/);
       console.log(values);
       yValues.push(parseFloat(values[0]));
-      xValues.push(parseFloat(values[1]) * 100);
+      xValues.push(parseFloat(values[1]));
       // totalCount.push(parseFloat(values[2]));
       // percentileRank.push(parseFloat(values[3]));
     });
@@ -60,6 +61,8 @@ export default function Histogram() {
         x: xValues,
         y: yValues,
         type: 'scatter',
+        mode: 'lines+markers',
+        marker: {color: 'red'},
       },
     ];
   });

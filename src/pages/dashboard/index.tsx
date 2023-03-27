@@ -4,6 +4,32 @@ import styles from './dashboard.module.css';
 import utilStyles from '../../styles/utils.module.css';
 import DashLayout from './layout';
 import { useState } from 'react';
+// import { MyChart } from '../../../wrk_lua/sample_data';
+import { getHistogramData } from '../../../wrk_lua/getHistogramData';
+import MyChart from '../../../components/Chart/chart';
+
+// console.log(MyChart);
+
+// const plotData = [
+//   {
+//     x: xValues,
+//     y: yValues,
+//     type: 'scatter',
+//     mode: 'lines+markers',
+//     marker: {color: 'red'},
+//   },
+// ];
+// import dynamic from 'next/dynamic';
+// const PlotlyGraph = dynamic(
+//     () =>
+//         import(
+//             '../graphs/graph.component'
+//         ),
+//     {
+//         ssr: false,
+//         loading: () => <>Loading...</>,
+//     },
+// );
 
 type InitialConstants = {
   rootUrl: string;
@@ -28,7 +54,7 @@ const index = () => {
   const initialConstants: InitialConstants = {
     rootUrl: '',
     numOfThreads: 2,
-    testDuration: 60,
+    testDuration: 5,
     numOfUsers: 50,
     throughput: 100
   };
@@ -40,6 +66,29 @@ const index = () => {
     contentType: 'application/json',
     ratio: 1,
   };
+  
+  const initialPlotLayout = {
+    title: 'Response Latency',
+    xaxis: {
+      title: 'Percentile',
+      tickmode: 'array',
+      tickvals: [0, 90, 99],
+      ticktext: ['0%', '90%', '99%'],
+
+    },
+    yaxis: {
+      title: 'Latency (milliseconds)',
+    }
+  }
+
+  // equal bin size
+  // const initialPlotData = [{x: [], 
+  //   y: [],
+  //   type: 'scatter',
+  //   mode: 'lines+markers',
+  //   marker: {color: 'red'},
+  // }];
+  const initialPlotData = [];
 
   const initialMethods: InitialMethods = [];
 
@@ -50,6 +99,8 @@ const index = () => {
   const [isPost, setIsPost] = useState(false);
   const [methods, setMethods] = useState(initialMethods);
   const [ratioSum, setRatioSum] = useState(initialRatioSum);
+  const [plotData, setPlotData] = useState(initialPlotData);
+  const [layout, setLayout] = useState(initialPlotLayout);
 
   const startTest = async (): Promise<void> => {
     console.log('constants: ', constants);
@@ -71,10 +122,19 @@ const index = () => {
     });
 
     const runScript = await fetch('/api/execScript');
-
-    // const makeHistogram = await fetch('api/createHistogram')
+    setTimeout(async ()=> {
+      const response = await getHistogramData();
+      // console.log('response: ', response);
+      // const makeHistogram = await fetch('api/createHistogram')
+      
+      const newplotData = [...plotData];
+      newplotData.push(response.plotData[0]);
+      setPlotData(newplotData);
+      
+        // Calculate the spacing between the tickvals
+      // setLayout({...layout, response.layout});
+    }, (constants.testDuration + 1) * 1000)
   };
-
   // const rawOrEncoded = (button: any) => {
   //   console.log(button);
   // };
@@ -269,7 +329,10 @@ const index = () => {
             })}
           </ul>
         </section>
-        <div id="myPlotDiv"></div>
+        <div><MyChart
+        data={plotData}
+        layout={layout}
+        /></div>
       </main>
     </DashLayout>
   );

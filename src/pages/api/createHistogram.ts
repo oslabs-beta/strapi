@@ -1,15 +1,28 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Histogram from '../../../wrk_lua/histogramData';
+import Histogram from '../../../components/Histogram/histogramData';
 import fs from 'fs';
 
 export default async function histogram(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+  // const layout = {
+  //   title: 'My Line Plot',
+  //   xaxis: {
+  //     title: 'Percentile',
+  //     tickvals: [0, 90, 99, 99.9],
+  //     ticktext: ['%'],
+  //   },
+  //   yaxis: {
+  //     title: 'Latency (milliseconds)',
+  //   },
+  // };
+  const plot = [];
   fs.readFile('result.txt', (err, data) => {
-    if (err) throw err;
     const yValues = [];
     const xValues = [];
+    if (err) throw err;
     // Split the data into an array of lines
     const dataStr = data.toString();
     const lines = dataStr.split('\n');
@@ -31,41 +44,43 @@ export default async function histogram(
 
     const histogramData = dataLines.map((line) => {
       const values = line.trim().split(/\s+/);
-      console.log(values);
+      // console.log(values);
       yValues.push(parseFloat(values[0]));
       xValues.push(parseFloat(values[1]) * 100);
       // totalCount.push(parseFloat(values[2]));
       // percentileRank.push(parseFloat(values[3]));
     });
-    console.log('xValues: ', xValues);
-    console.log('yValues: ', yValues);
-    // console.log('totalCount: ', totalCount);
-    // console.log('percentileRank: ', percentileRank);
+    // console.log('xValues: ', xValues);
+    // console.log('yValues: ', yValues);
 
-    // // Create the histogram chart
-    const trace =[{
+    // random rgb color generator
+    function randomColor () {
+      let r = Math.floor(Math.random() * 255);
+      let g = Math.floor(Math.random() * 255);
+      let b = Math.floor(Math.random() * 255);
+      while(r > 220 && g > 220 && b > 220) {
+        console.log("r g b: ", r,g,b);
+        r = Math.floor(Math.random() * 255);
+        g = Math.floor(Math.random() * 255);
+        b = Math.floor(Math.random() * 255);
+      }
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+    
+    // const randomColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
+    //   Math.random() * 255
+    // )}, ${Math.floor(Math.random() * 255)})`;
+    const obj = {
       x: xValues,
       y: yValues,
       type: 'scatter',
-    }];
-
-    const layout = {
-      title: 'My Line Plot',
-      xaxis: {
-        title: 'X Axis Label',
-        tickvals: [0, 90, 99, 99.9],
-        ticktext: ['%'],
-      },
-      yaxis: {
-        title: 'Y Axis Label',
-      },
+      mode: 'lines+markers',
+      hovertemplate: 'X: %{x}%<br>Y: %{y}ms',
+      marker: { color: randomColor() },
     };
-    // const chartLayout = {
-    //   title: 'Latency by Percentile Distribution',
-    //   xaxis: { title: 'Percentile' },
-    //   yaxis: { title: 'Latency (ms)' },
-    // };
-    Plotly.newPlot('myPlotDiv', trace, layout);
-    // Plotly.newPlot(chartRef.current, chartData, chartLayout);
+    
+    plot.push(obj);
+    console.log('plot: ', plot);
+    res.status(200).json({plot});
   });
 }
