@@ -1,0 +1,28 @@
+.bgDarkest {
+  background-color: #2c3333;
+}
+
+.bgDarkgreen {
+  background-color: #2e4f4f;
+}
+
+.bgTeal {
+  background-color: #0e8388;
+}
+
+.bgLight {
+  background-color: #cbe4de;
+}
+
+.btnBoxShadow {
+  box-shadow: 0 0 3px 0 #cbe4de;
+}
+
+.btnBoxShadow:hover {
+  background-color: #0e8388;
+  color: #2c3333;
+}
+
+.navBoxShadow {
+  box-shadow: 0 0 5px 0 #cbe4de;
+}

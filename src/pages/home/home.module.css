@@ -1,0 +1,37 @@
+.homeContainer {
+  width: 100%;
+  max-width: 1320px;
+  display: grid;
+  grid-template-areas:
+    'img img img img'
+    'wt wt wt wt'
+    'st st st st'
+    'ab ab ab ab';
+  justify-items: center;
+}
+
+.logo {
+  grid-area: img;
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcomeText {
+  grid-area: wt;
+  font-size: 3rem;
+}
+
+.stressTest {
+  grid-area: st;
+  font-size: 1.75rem;
+  margin: 1rem;
+}
+
+.about {
+  grid-area: ab;
+  font-size: 1.25rem;
+  width: 60%;
+  text-align: center;
+}

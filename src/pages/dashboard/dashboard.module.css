@@ -1,0 +1,148 @@
+.dashContainer {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 75px);
+}
+
+.inputContainer {
+  margin: 0;
+  padding: 25px;
+  width: calc(100% - 200px);
+  max-width: 1600px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 50px;
+  gap: 25px;
+}
+
+.h1 {
+  grid-column: 1 / span 2;
+}
+
+.btnStartTest {
+  grid-column: 1 / span 2;
+  width: 200px;
+  color: black;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.currentMethods {
+  grid-column: 1 / span 2;
+  width: 50%;
+}
+
+.methodList {
+  list-style-type: disc;
+}
+
+.listItem {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.routeDisplay {
+  overflow-x: hidden;
+}
+
+.deleteMethod {
+  color: white;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.inputDataForm {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  top: 0;
+}
+
+.input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+  margin-bottom: 1rem;
+}
+
+.textArea {
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.urlEncoded {
+  display: flex;
+  gap: 15px;
+}
+
+.btnAddParam {
+  width: 25%;
+  font-size: 1rem;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: 0.1s all ease-in-out;
+}
+
+.btnAddParam:hover {
+  transform: scale(1.05);
+}
+
+.metricsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: calc(100% - 200px);
+  gap: 50px;
+  padding: 50px;
+  overflow-y: scroll;
+}
+
+.info {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.pageTitle {
+  padding: 0;
+  font-size: 2.5rem;
+}
+
+.credit {
+  font-size: 1.25rem;
+  margin: 1rem 0;
+}
+
+.addPanelLabel {
+  margin: 1rem 0 0.5rem 0;
+}
+
+.panelSrcInput {
+  width: 33%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+.btnAddPanel {
+  color: black;
+  width: 100px;
+  font-size: 1rem;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.bigText {
+  font-size: 2.5rem;
+}
