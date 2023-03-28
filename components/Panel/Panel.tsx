@@ -15,7 +15,7 @@ const Panel = ({ url, index, deletePanel }: PanelProps): JSX.Element => {
         onClick={(e: any) => deletePanel(e.target.id)}
         className={styles.btnDelete}
       >
-        X
+        Remove Panel
       </button>
       <iframe src={url} className={styles.panel}></iframe>
     </div>

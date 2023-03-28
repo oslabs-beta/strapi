@@ -1,33 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import styles from './dashboard.module.css';
-import utilStyles from '../../styles/utils.module.css';
 import DashLayout from './layout';
-// import { useState } from 'react';
-// import { MyChart } from '../../../wrk_lua/sample_data';
 import { getHistogramData } from '../../../wrk_lua/getHistogramData';
 import MyChart from '../../../components/Chart/chart';
 
-// const plotData = [
-//   {
-//     x: xValues,
-//     y: yValues,
-//     type: 'scatter',
-//     mode: 'lines+markers',
-//     marker: {color: 'red'},
-//   },
-// ];
-// import dynamic from 'next/dynamic';
-// const PlotlyGraph = dynamic(
-//     () =>
-//         import(
-//             '../graphs/graph.component'
-//         ),
-//     {
-//         ssr: false,
-//         loading: () => <>Loading...</>,
-//     },
-// );
 
 type InitialConstants = {
   rootUrl: string;
@@ -49,12 +25,15 @@ type InitialMethods = InitialParams[];
 type ratioSum = number;
 
 const index = () => {
+  const inputStyle =
+    'h-10 text-lg text-slate-900 p-3 rounded-md border border-slate-100 shadow-md shadow-slate-500';
+
   const initialConstants: InitialConstants = {
     rootUrl: '',
     numOfThreads: 2,
     testDuration: 5,
     numOfUsers: 50,
-    throughput: 100
+    throughput: 100,
   };
 
   const initialParams: InitialParams = {
@@ -79,13 +58,6 @@ const index = () => {
     }
   }
 
-  // equal bin size
-  // const initialPlotData = [{x: [], 
-  //   y: [],
-  //   type: 'scatter',
-  //   mode: 'lines+markers',
-  //   marker: {color: 'red'},
-  // }];
   const initialPlotData = [];
 
   const initialMethods: InitialMethods = [];
@@ -176,27 +148,9 @@ const index = () => {
     });
 
     const runScript = await fetch('/api/execScript');
-    // addTrace(response.plotData[0]);
     setTimeout((async () => {
       const response = await retryGetHistogramData();
-      // const response = await getHistogramData();
-      // addTrace(response.plotData[0]);
-      // const newplotData = [...plotData];
-      // newplotData.push(response.plotData[0]);
-      // setPlotData(newplotData);
     }),(constants.testDuration + .5) * 1000)
-    // newplotData.push(response.plotData[0]);
-  //   setTimeout(async ()=> {
-  //     let counter = 0;
-  //     await new Promise((resolve) => setTimeout(resolve, (constants.testDuration + 1) * 1000));
-  //     const response = await asyncFunction();
-  //     console.log(response);
-  //     const newplotData = [...plotData];
-  //     newplotData.push(response.plotData[0]);
-  //   });
-  // }
-  // const rawOrEncoded = (button: any) => {
-  //   console.log(button);
   };
   async function retryGetHistogramData(maxRetries = 60, delay = 1000){
     let currentRetry = 0;
@@ -229,15 +183,6 @@ const index = () => {
     addTrace(response.plotData[0]);
   }
   
-  // const asyncFunction = () => {
-  //   return new Promise((resolve, reject) => {
-  //     getHistogramData();
-  //     setTimeout(() => {
-  //       resolve(data);
-  //     }, 2000)
-  //   })
-  // }
-  
   const addMethod = () => {
     setRatioSum(Number(ratioSum) + Number(params.ratio));
     setMethods(methods.concat(params));
@@ -262,173 +207,179 @@ const index = () => {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <main className={`${styles.inputContainer} overflow-y-scroll`}>
-        <h1 className={styles.h1}>Input Required Data:</h1>
-        <button onClick={() => startTest()} className={styles.btnStartTest}>
-          Submit
+      <main className="grow flex flex-col items-start w-full">
+        {/* <div className="text-center grid-rows-6 grid-flow-col gap-4"> */}
+        <h1 className=" text-3xl">Input Required Data:</h1>
+        <button
+          onClick={() => startTest()}
+          className=" bg-sky-900 p-3 mt-3 mb-3 rounded-md cursor-pointer text-sky-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-amber-600"
+        >
+          Start Test
         </button>
 
-        <form id="testing-constants" className={styles.inputDataForm}>
-          <h1 className={styles.h1}>Testing Constants:</h1>
-          <label>Root URL:</label>
-          <input
-            onChange={(e: any) =>
-              setConstants({ ...constants, rootUrl: e.target.value })
-            }
-            value={constants.rootUrl}
-            id="root-url"
-            className={styles.input}
-            type="text"
-            placeholder="http://localhost:<PORT>"
-          />
-          <label>Number of threads:</label>
-          <input
-            onChange={(e: any) =>
-              setConstants({ ...constants, numOfThreads: e.target.value })
-            }
-            value={constants.numOfThreads}
-            id="number-of-threads"
-            className={styles.input}
-            type="text"
-            placeholder="1"
-          />
-          <label>Total Test Duration (seconds):</label>
-          <input
-            onChange={(e: any) =>
-              setConstants({ ...constants, testDuration: e.target.value })
-            }
-            value={constants.testDuration}
-            id="test-duration"
-            className={styles.input}
-            type="text"
-            placeholder="60"
-          />
-          <label>Number Of Users/Connections:</label>
-          <input
-            onChange={(e: any) =>
-              setConstants({ ...constants, numOfUsers: e.target.value })
-            }
-            value={constants.numOfUsers}
-            id="connections"
-            className={styles.input}
-            type="text"
-            placeholder="1"
-          />
-          <label>Throughput (requests/sec):</label>
-          <input
-            onChange={(e: any) =>
-              setConstants({ ...constants, throughput: e.target.value })
-            }
-            value={constants.throughput}
-            id="connections"
-            className={styles.input}
-            type="text"
-            placeholder="100"
-          />
-        </form>
+        <section className="grid grid-cols-2 w-full gap-8 p-4 max-w-7xl">
+          <form id="testing-constants" className="flex flex-col gap-3">
+            <h1 className="text-2xl">Testing Constants:</h1>
+            <label>Root URL:</label>
+            <input
+              onChange={(e: any) =>
+                setConstants({ ...constants, rootUrl: e.target.value })
+              }
+              value={constants.rootUrl}
+              id="root-url"
+              className={inputStyle}
+              type="text"
+              placeholder="http://localhost:<PORT>"
+            />
+            <label>Number of threads:</label>
+            <input
+              onChange={(e: any) =>
+                setConstants({ ...constants, numOfThreads: e.target.value })
+              }
+              value={constants.numOfThreads}
+              id="number-of-threads"
+              className={inputStyle}
+              type="text"
+              placeholder="1"
+            />
+            <label>Total Test Duration (seconds):</label>
+            <input
+              onChange={(e: any) =>
+                setConstants({ ...constants, testDuration: e.target.value })
+              }
+              value={constants.testDuration}
+              id="test-duration"
+              className={inputStyle}
+              type="text"
+              placeholder="5"
+            />
+            <label>Number Of Users/Connections:</label>
+            <input
+              onChange={(e: any) =>
+                setConstants({ ...constants, numOfUsers: e.target.value })
+              }
+              value={constants.numOfUsers}
+              id="connections"
+              className={inputStyle}
+              type="text"
+              placeholder="1"
+            />
+            <label>Throughput (requests/sec):</label>
+            <input
+              onChange={(e: any) =>
+                setConstants({ ...constants, throughput: e.target.value })
+              }
+              value={constants.throughput}
+              id="connections"
+              className={inputStyle}
+              type="text"
+              placeholder="100"
+            />
+          </form>
 
-        <form id="testing-params" className={styles.inputDataForm}>
-          <h1>Testing Parameters</h1>
+          <form id="testing-params" className="flex flex-col gap-3">
+            <h1 className="text-2xl">Testing Parameters</h1>
 
-          <label>Route:</label>
-          <input
-            onChange={(e: any) =>
-              setParams({ ...params, route: e.target.value })
-            }
-            value={params.route}
-            id="route"
-            className={styles.input}
-            type="text"
-            placeholder="/api/route"
-          />
-          <label>HTTP Method:</label>
-          <select
-            onChange={(e: any) => {
-              setParams({ ...params, method: e.target.value });
-              setIsPost((prev) => !prev);
-            }}
-            className={styles.input}
-            name="choose-method"
-            id="method"
-          >
-            <option value="GET">GET</option>
-            <option value="POST">POST</option>
-          </select>
-          <label>Ratio:</label>
-          <input
-            onChange={(e: any) =>
-              setParams({ ...params, ratio: e.target.value })
-            }
-            value={params.ratio}
-            id="ratio"
-            className={styles.input}
-            type="text"
-            placeholder="1"
-          />
+            <label>Route:</label>
+            <input
+              onChange={(e: any) =>
+                setParams({ ...params, route: e.target.value })
+              }
+              value={params.route}
+              id="route"
+              className={inputStyle}
+              type="text"
+              placeholder="/api/route"
+            />
+            <label>HTTP Method:</label>
+            <select
+              onChange={(e: any) => {
+                setParams({ ...params, method: e.target.value });
+                setIsPost((prev) => !prev);
+              }}
+              className={`${inputStyle} text-sm`}
+              name="choose-method"
+              id="method"
+            >
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+            </select>
+            <label>Ratio:</label>
+            <input
+              onChange={(e: any) =>
+                setParams({ ...params, ratio: e.target.value })
+              }
+              value={params.ratio}
+              id="ratio"
+              className={inputStyle}
+              type="text"
+              placeholder="1"
+            />
 
-          {isPost ? (
-            <div className={styles.textArea}>
-              {/* <div className={styles.urlEncoded}>
-                <label>x-www-form-urlencoded</label>
-                <input
-                  onClick={(e: any) => rawOrEncoded(e.target)}
-                  type="radio"
-                  value="x-www-form-urlencoded"
-                />
-                <label>raw</label>
-                <input type="radio" value="raw" />
-              </div> */}
-              {/* <div className={styles.urlEncoded}></div> */}
-              <h3>POST Request Body:</h3>
-              <p>(Must be in JSON format)</p>
-              <textarea
-                style={{
-                  color: 'black',
-                  fontSize: '1rem',
-                }}
-                onChange={(e: any) =>
-                  setParams({
-                    ...params,
-                    body: e.target.value,
-                  })
-                }
-                placeholder={`{ "key": "value", "firstName": "Steven" }`}
-                name="body"
-                id="body"
-                cols={5}
-                rows={10}
-              ></textarea>
-            </div>
-          ) : null}
+            {isPost ? (
+              <div className="">
+                <h3>POST Request Body:</h3>
+                <p>(Must be in JSON format)</p>
+                <textarea
+                  onChange={(e: any) =>
+                    setParams({
+                      ...params,
+                      body: e.target.value,
+                    })
+                  }
+                  placeholder={`{ "key": "value", "firstName": "Steven" }`}
+                  className={`${inputStyle} w-full h-24`}
+                  name="body"
+                  id="body"
+                  cols={5}
+                  rows={10}
+                ></textarea>
+              </div>
+            ) : null}
 
-          <button
-            onClick={() => addMethod()}
-            className=" bg-slate-500 w-24 p-3 rounded-md hover:scale-110 transition-all shadow-lg shadow-slate-200"
-            type="button"
-          >
-            Add Method
-          </button>
-        </form>
-        <section className={styles.currentMethods}>
-          <h1>Current Methods:</h1>
-          <ul className={styles.methodLst}>
+            <button
+              onClick={() => addMethod()}
+              className="bg-sky-900 p-3 mt-3 mb-3 rounded-md cursor-pointer text-sky-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-amber-600"
+              type="button"
+            >
+              Add Method
+            </button>
+          </form>
+        </section>
+        <section className="mt-6 mb-40 w-full max-w-7xl relative">
+          <h1 className="text-2xl mt-3 mb-3">Current Methods:</h1>
+          <div className="text-lg text-center w-full grid grid-cols-5 border-b border-b-amber-500">
+            <p>Route</p>
+            <p>HTTP Method</p>
+            <p>Request Body</p>
+            <p>Ratio</p>
+            <p className="">Delete Method</p>
+          </div>
+          <ul className=" flex flex-col text-center gap-4 w-full">
             {methods.map((method, index) => {
               return (
-                <li key = {index} id={index.toString()} className={styles.listItem}>
-                  <p className={styles.routeDisplay}>{method.route}</p>
-                  <p>{method.method}</p>
-                  {/* <p>{method.method === 'POST' ? method.body : null}</p> */}
-                  {method.method === 'POST' ? <p>{method.body}</p> : null}
-                  <p>
+                <li key={index} id={index.toString()} className="w-full grid grid-cols-5">
+                  <p className="mt-1">{method.route}</p>
+                  <p className="mt-1">{method.method}</p>
+                  {method.method === 'POST' ? (
+                    <p className="mt-1 overflow-hidden text-center ">
+                      {method.body}
+                    </p>
+                  ) : (
+                    'N/A'
+                  )}
+                  <p className="mt-1">
                     {method.ratio}:{ratioSum}
                   </p>
-                  <button
-                    id={index.toString()}
-                    onClick={(e) => deleteMethod(e.target)}
-                    className={styles.deleteMethod}
-                  >
-                    X
-                  </button>
+                  <div className="">
+                    <button
+                      id={index.toString()}
+                      onClick={(e) => deleteMethod(e.target)}
+                      className=" self-center w-20 bg-sky-900 mt-1 mb-1 rounded-md cursor-pointer text-sky-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-amber-600"
+                    >
+                      DELETE
+                    </button>
+                  </div>
                 </li>
               );
             })}

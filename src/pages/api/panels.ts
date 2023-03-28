@@ -9,7 +9,7 @@ export default async function panels(
 ) {
   const dbUrl = path.join(process.cwd(), '/src/lib/');
 
-  const METHOD: string = req.method;
+  const METHOD: string | undefined = req.method;
 
   switch (METHOD) {
     case 'GET':
@@ -36,11 +36,18 @@ export default async function panels(
         dbUrl + '/grafanaUrls.json',
         'utf-8'
       );
+      // console.log("This is urlsDELETE: ", urlsDELETE);
       const allUrls = JSON.parse(urlsDELETE);
+      // console.log("This is allUrls: ", allUrls);
       const newUrls = allUrls.filter(
         (url: string, index: number) => urlIndex != index
       );
-      console.log(newUrls);
+      // console.log("This is the newURLs", newUrls);
+      // save newUrls to file
+      await fs.writeFile(
+        dbUrl + '/grafanaUrls.json',
+        JSON.stringify(newUrls)
+      );
       return res.status(200).json({ message: 'Successfully deleted panel.' });
 
     default:

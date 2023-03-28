@@ -11,7 +11,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'nice-blue': 'rgb(0, 255, 255)',
+        midnight: 'rgb(18, 16, 99)',
+      },
+      boxShadow: {
+        'sm-right': '2px 5px 5px 0 rgba(200, 200, 200, 0.5)',
+      },
+      backgroundImage: {
+        'bg-bubbles': "url('/public/bubbles.png')",
       },
     },
   },

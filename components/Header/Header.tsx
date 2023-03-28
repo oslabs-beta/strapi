@@ -1,35 +1,29 @@
 import React from 'react';
-import styles from './header.module.css';
-import utilStyles from '../../src/styles/utils.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
 const Header = () => {
   return (
-    <header
-      className={`${styles.header} ${utilStyles.bgDarkest} ${utilStyles.navBoxShadow}`}
-    >
-      <Link href="/" className={`${styles.hero} ${styles.link}`}>
-        <Image src="/logo.png" alt="strAPI logo" width={50} height={50} />
-        <h1>strAPI</h1>
+    <header className=" flex justify-between w-full p-4 shadow-lg shadow-pink mb-4">
+      <Link href="/" className=" flex justify-between items-center gap-4">
+        <Image src="/logo.png" alt="strAPI logo" width={70} height={70} />
+        <h1 className=" text-4xl hover:text-sky-300">
+          Str
+          <span className=" text-amber-600 font-normal ">API</span>
+        </h1>
       </Link>
-      <nav className={styles.nav}>
-        <Link className={styles.link} href="/about">
+      <nav className=" flex justify-between items-center gap-10 pr-4">
+        <Link
+          className=" cursor-pointer hover:text-sky-300 hover:scale-110 hover:underline decoration-amber-600 transition-all"
+          href="/about"
+        >
           About
         </Link>
-        <Link className={styles.link} href="/tutorial">
-          Tutorial
-        </Link>
-        <Link className={styles.link} href="/dashboard">
+        <Link
+          className="cursor-pointer hover:text-sky-300 hover:scale-110 hover:underline decoration-amber-600 transition-all"
+          href="/dashboard"
+        >
           Dashboard
-        </Link>
-        <Link className={styles.link} href="/login">
-          <button
-            disabled
-            className={`${styles.signin} ${utilStyles.bgDarkgreen} ${utilStyles.btnBoxShadow}`}
-          >
-            Sign In or Sign Up
-          </button>
         </Link>
       </nav>
     </header>
@@ -37,5 +31,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// client / public / logo.png;
