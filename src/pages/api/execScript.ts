@@ -6,10 +6,6 @@ export default async function scripts(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'GET') {
-    runScript(req, res);
-    res.status(200).send('Script executing...');
-  } else {
-    res.status(400).send('Invalid request method');
-  }
+  await runScript(req, res);
+  res.status(200).send('running script');
 }
