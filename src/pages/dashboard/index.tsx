@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import DashLayout from './layout';
-import { useState } from 'react';
+import { getHistogramData } from '../../../wrk_lua/getHistogramData';
+import MyChart from '../../../components/Chart/Chart';
+
 
 type InitialConstants = {
   rootUrl: string;
@@ -20,7 +22,6 @@ type InitialParams = {
 };
 
 type InitialMethods = InitialParams[];
-
 type ratioSum = number;
 
 const index = () => {
@@ -42,6 +43,22 @@ const index = () => {
     contentType: 'application/json',
     ratio: 1,
   };
+  
+  const initialPlotLayout = {
+    title: 'Response Latency',
+    xaxis: {
+      title: 'Percentile',
+      tickmode: 'array',
+      tickvals: [0, 90, 99],
+      ticktext: ['0%', '90%', '99%'],
+
+    },
+    yaxis: {
+      title: 'Latency (milliseconds)',
+    }
+  }
+
+  const initialPlotData = [];
 
   const initialMethods: InitialMethods = [];
 
@@ -52,6 +69,64 @@ const index = () => {
   const [isPost, setIsPost] = useState(false);
   const [methods, setMethods] = useState(initialMethods);
   const [ratioSum, setRatioSum] = useState(initialRatioSum);
+  const [plotData, setPlotData] = useState(initialPlotData);
+  const [layout, setLayout] = useState(initialPlotLayout);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  // fetches data from /api/histogramCache.ts.
+  const getTraces = async (): Promise<void> => {
+    const res = await fetch('/api/histogramCache', {
+      method: 'GET',
+      headers: { 'Content-Type': 'Application/JSON' },
+    });
+    const data = await res.json();
+    console.log('data from getTraces: ', data);
+    // NOTE: we are using a .json file as our storage, so we also need to parse the file contents using JSON.parse()
+    const graphTraces: Number[] = JSON.parse(data);
+    setPlotData(graphTraces);
+    setIsLoading(false);
+  };
+
+  // runs on initial page render
+  useEffect(() => {
+    setIsLoading(true);
+    getTraces();
+  }, []);
+
+  const addTrace = async (trace): Promise<void> => {
+    const body = {
+      newTrace : trace,
+    };
+
+    try {
+      await fetch('/api/histogramCache', {
+        method: 'POST',
+        headers: { 'Content-Type': 'Application/JSON' },
+        body: JSON.stringify(body),
+      });
+      getTraces();
+    } catch (err) {
+      throw new Error('Unable to add trace.');
+    }
+  };
+
+  const deleteTrace = async (id: Number): Promise<void> => {
+    const body = {
+      traceIndex: Number(id),
+    };
+
+    try {
+      await fetch('/api/histogramCache', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'Application/JSON' },
+        body: JSON.stringify(body),
+      });
+      getTraces();
+    } catch (err) {
+      throw new Error('Unable to delete traces.');
+    }
+  };
 
   const startTest = async (): Promise<void> => {
     console.log('constants: ', constants);
@@ -72,15 +147,42 @@ const index = () => {
       },
     });
 
-    const runScript = await fetch('/api/execScript', {
-      method: 'GET',
-    });
+    const runScript = await fetch('/api/execScript');
+    setTimeout((async () => {
+      const response = await retryGetHistogramData();
+    }),(constants.testDuration + .5) * 1000)
   };
+  async function retryGetHistogramData(maxRetries = 60, delay = 1000){
+    let currentRetry = 0;
+    console.log('currentRetry: inner', currentRetry);
+    while (currentRetry < maxRetries) {
+      console.log('currentRetry: outer', currentRetry);
+      try {
+        const response = await getHistogramData();
+        if (response.plotData.length > 0) {
+          console.log('response: ', response);
+          addTrace(response.plotData[0]);
+          return;
+        }
+        // return;
+      } catch (error) {
+        console.error(`Error on retry ${currentRetry + 1}:`, error);
+        currentRetry++;
+        if (currentRetry >= maxRetries) {
+          throw new Error(`Failed after ${maxRetries} retries`);
+        }
+      }
+  
+      // Wait for the specified delay before retrying
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
 
-  // const rawOrEncoded = (button: any) => {
-  //   console.log(button);
-  // };
-
+  async function manuallyRequestPlotData() {
+    const response = await getHistogramData();
+    addTrace(response.plotData[0]);
+  }
+  
   const addMethod = () => {
     setRatioSum(Number(ratioSum) + Number(params.ratio));
     setMethods(methods.concat(params));
@@ -93,7 +195,13 @@ const index = () => {
     newMethods.splice(idx, 1);
     setMethods([...newMethods]);
   };
+  const revealDropdownOptions = () => {
+    setShowDropdown(!showDropdown);
+  }
 
+  const handleOptionClick = (option) => {
+    deleteTrace(option);
+  };
   return (
     <DashLayout>
       <Head>
@@ -250,7 +358,7 @@ const index = () => {
           <ul className=" flex flex-col text-center gap-4 w-full">
             {methods.map((method, index) => {
               return (
-                <li id={index.toString()} className="w-full grid grid-cols-5">
+                <li key={index} id={index.toString()} className="w-full grid grid-cols-5">
                   <p className="mt-1">{method.route}</p>
                   <p className="mt-1">{method.method}</p>
                   {method.method === 'POST' ? (
@@ -277,7 +385,43 @@ const index = () => {
             })}
           </ul>
         </section>
-        {/* </div> */}
+        <div><MyChart
+        data={plotData}
+        layout={layout}
+        /></div>
+        <div className="dropdown">
+        <button onClick={manuallyRequestPlotData}>
+          <b>Request Plot Data Manually</b>
+        </button>
+        <br />
+        <button className="dropbtn" onClick={revealDropdownOptions}>
+          <b>Remove Traces</b>
+          </button>
+          {showDropdown && (
+            <div className="dropdown-content">
+              {plotData.map((option, index) => (
+                <div>
+                <a
+                  key={index}
+                  href="#"
+                  onClick={() => handleOptionClick(index)}
+                >
+                  Delete trace: {index}
+                </a>
+                </div>
+              ))}
+              <div>
+                <a
+                  key={-1}
+                  href="#"
+                  onClick={() => handleOptionClick(-1)}
+                >
+                  Delete All Traces
+                </a>
+            </div>
+          </div>
+        )}
+    </div>
       </main>
     </DashLayout>
   );
