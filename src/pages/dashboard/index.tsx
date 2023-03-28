@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import DashLayout from './layout';
 import { getHistogramData } from '../../../wrk_lua/getHistogramData';
-import MyChart from '../../../components/Chart/chart';
+import MyChart from '../../../components/Chart/Chart';
 
 
 type InitialConstants = {
