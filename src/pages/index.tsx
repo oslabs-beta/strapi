@@ -7,17 +7,20 @@ export default function Home() {
   return (
     <Layout>
       {/* <main className={styles.homeContainer}> */}
-      <main className=" flex flex-col items-center p-14 h-full w-full max-w-screen-2xl">
-        <Image
-          src="/logo.png"
-          alt="strAPI logo"
-          height={250}
-          width={250}
-          className=""
-        />
+      <main className=" flex flex-col items-center p-18 h-full w-full max-w-screen-2xl">
+        <div className = "relative">
+          <div className= "absolute inset-0 bg-orange-300 rounded-full blur-3xl"></div>
+          <Image
+            src="/logo-removebg-preview.png"
+            alt="strAPI logo"
+            height={250}
+            width={250}
+            className="relative border-none bg-none"
+          />
+        </div>
         {/* <h1 className={styles.welcomeText}>Welcome to strAPI!</h1> */}
         {/* <h1 className=" text-5xl cursor-pointer hover:text-blue-400"> */}
-        <h1 className="text-5xl">
+        <h1 className="text-5xl pt-8">
           Welcome to Str<span className=" text-amber-600 font-normal">API</span>
           !
         </h1>
