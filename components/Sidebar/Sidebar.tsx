@@ -5,23 +5,19 @@ import utilStyles from '../../src/styles/utils.module.css';
 
 const Sidebar = () => {
   return (
-    <nav
-      className={`${styles.nav} ${utilStyles.bgDarkest} ${utilStyles.navBoxShadow}`}
-    >
-      <p>Navigation Panel</p>
-      <Link className={`${styles.link}`} href="/dashboard">
-        <button
-          className={`${styles.btnNav} ${utilStyles.bgDarkgreen} ${utilStyles.navBtnBoxShadow}`}
-        >
-          New Test
-        </button>
+    <nav className=" p-4 shrink-0 h-full w-1/5 max-w-xs flex flex-col items-start gap-4">
+      <p className=" text-2xl font-light">Navigation Panel</p>
+      <Link
+        className="cursor-pointer hover:text-sky-300 hover:scale-110 hover:underline decoration-amber-600 transition-all"
+        href="/dashboard"
+      >
+        <button className="">New Test</button>
       </Link>
-      <Link className={`${styles.link}`} href="dashboard/metrics">
-        <button
-          className={`${styles.btnNav} ${utilStyles.bgDarkgreen} ${utilStyles.navBtnBoxShadow}`}
-        >
-          Grafana Metrics
-        </button>
+      <Link
+        className="cursor-pointer hover:text-sky-300 hover:scale-110 hover:underline decoration-amber-600 transition-all"
+        href="dashboard/metrics"
+      >
+        <button className="">Grafana Metrics</button>
       </Link>
     </nav>
   );

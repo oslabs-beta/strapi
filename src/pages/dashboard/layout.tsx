@@ -6,7 +6,7 @@ import styles from './dashboard.module.css';
 const DashLayout = ({ children }) => {
   return (
     <Layout>
-      <section className={styles.dashContainer}>
+      <section className="grow flex justify-between relative w-full">
         <Sidebar />
         {children}
       </section>
