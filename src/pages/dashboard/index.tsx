@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from './dashboard.module.css';
 import utilStyles from '../../styles/utils.module.css';
 import DashLayout from './layout';
-import { useState } from 'react';
+// import { useState } from 'react';
 // import { MyChart } from '../../../wrk_lua/sample_data';
 import { getHistogramData } from '../../../wrk_lua/getHistogramData';
 import MyChart from '../../../components/Chart/chart';
-
-// console.log(MyChart);
 
 // const plotData = [
 //   {
@@ -101,6 +99,62 @@ const index = () => {
   const [ratioSum, setRatioSum] = useState(initialRatioSum);
   const [plotData, setPlotData] = useState(initialPlotData);
   const [layout, setLayout] = useState(initialPlotLayout);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  // fetches data from /api/histogramCache.ts.
+  const getTraces = async (): Promise<void> => {
+    const res = await fetch('/api/histogramCache', {
+      method: 'GET',
+      headers: { 'Content-Type': 'Application/JSON' },
+    });
+    const data = await res.json();
+    console.log('data from getTraces: ', data);
+    // NOTE: we are using a .json file as our storage, so we also need to parse the file contents using JSON.parse()
+    const graphTraces: Number[] = JSON.parse(data);
+    setPlotData(graphTraces);
+    setIsLoading(false);
+  };
+
+  // runs on initial page render
+  useEffect(() => {
+    setIsLoading(true);
+    getTraces();
+  }, []);
+
+  const addTrace = async (trace): Promise<void> => {
+    const body = {
+      newTrace : trace,
+    };
+
+    try {
+      await fetch('/api/histogramCache', {
+        method: 'POST',
+        headers: { 'Content-Type': 'Application/JSON' },
+        body: JSON.stringify(body),
+      });
+      getTraces();
+    } catch (err) {
+      throw new Error('Unable to add trace.');
+    }
+  };
+
+  const deleteTrace = async (id: Number): Promise<void> => {
+    const body = {
+      traceIndex: Number(id),
+    };
+
+    try {
+      await fetch('/api/histogramCache', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'Application/JSON' },
+        body: JSON.stringify(body),
+      });
+      getTraces();
+    } catch (err) {
+      throw new Error('Unable to delete traces.');
+    }
+  };
 
   const startTest = async (): Promise<void> => {
     console.log('constants: ', constants);
@@ -122,23 +176,68 @@ const index = () => {
     });
 
     const runScript = await fetch('/api/execScript');
-    setTimeout(async ()=> {
-      const response = await getHistogramData();
-      // console.log('response: ', response);
-      // const makeHistogram = await fetch('api/createHistogram')
-      
-      const newplotData = [...plotData];
-      newplotData.push(response.plotData[0]);
-      setPlotData(newplotData);
-      
-        // Calculate the spacing between the tickvals
-      // setLayout({...layout, response.layout});
-    }, (constants.testDuration + 1) * 1000)
-  };
+    // addTrace(response.plotData[0]);
+    setTimeout((async () => {
+      const response = await retryGetHistogramData();
+      // const response = await getHistogramData();
+      // addTrace(response.plotData[0]);
+      // const newplotData = [...plotData];
+      // newplotData.push(response.plotData[0]);
+      // setPlotData(newplotData);
+    }),(constants.testDuration + .5) * 1000)
+    // newplotData.push(response.plotData[0]);
+  //   setTimeout(async ()=> {
+  //     let counter = 0;
+  //     await new Promise((resolve) => setTimeout(resolve, (constants.testDuration + 1) * 1000));
+  //     const response = await asyncFunction();
+  //     console.log(response);
+  //     const newplotData = [...plotData];
+  //     newplotData.push(response.plotData[0]);
+  //   });
+  // }
   // const rawOrEncoded = (button: any) => {
   //   console.log(button);
-  // };
+  };
+  async function retryGetHistogramData(maxRetries = 60, delay = 1000){
+    let currentRetry = 0;
+    console.log('currentRetry: inner', currentRetry);
+    while (currentRetry < maxRetries) {
+      console.log('currentRetry: outer', currentRetry);
+      try {
+        const response = await getHistogramData();
+        if (response.plotData.length > 0) {
+          console.log('response: ', response);
+          addTrace(response.plotData[0]);
+          return;
+        }
+        // return;
+      } catch (error) {
+        console.error(`Error on retry ${currentRetry + 1}:`, error);
+        currentRetry++;
+        if (currentRetry >= maxRetries) {
+          throw new Error(`Failed after ${maxRetries} retries`);
+        }
+      }
+  
+      // Wait for the specified delay before retrying
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
 
+  async function manuallyRequestPlotData() {
+    const response = await getHistogramData();
+    addTrace(response.plotData[0]);
+  }
+  
+  // const asyncFunction = () => {
+  //   return new Promise((resolve, reject) => {
+  //     getHistogramData();
+  //     setTimeout(() => {
+  //       resolve(data);
+  //     }, 2000)
+  //   })
+  // }
+  
   const addMethod = () => {
     setRatioSum(Number(ratioSum) + Number(params.ratio));
     setMethods(methods.concat(params));
@@ -151,7 +250,13 @@ const index = () => {
     newMethods.splice(idx, 1);
     setMethods([...newMethods]);
   };
+  const revealDropdownOptions = () => {
+    setShowDropdown(!showDropdown);
+  }
 
+  const handleOptionClick = (option) => {
+    deleteTrace(option);
+  };
   return (
     <DashLayout>
       <Head>
@@ -309,7 +414,7 @@ const index = () => {
           <ul className={styles.methodLst}>
             {methods.map((method, index) => {
               return (
-                <li id={index.toString()} className={styles.listItem}>
+                <li key = {index} id={index.toString()} className={styles.listItem}>
                   <p className={styles.routeDisplay}>{method.route}</p>
                   <p>{method.method}</p>
                   {/* <p>{method.method === 'POST' ? method.body : null}</p> */}
@@ -333,6 +438,39 @@ const index = () => {
         data={plotData}
         layout={layout}
         /></div>
+        <div className="dropdown">
+        <button onClick={manuallyRequestPlotData}>
+          <b>Request Plot Data Manually</b>
+        </button>
+        <br />
+        <button className="dropbtn" onClick={revealDropdownOptions}>
+          <b>Remove Traces</b>
+          </button>
+          {showDropdown && (
+            <div className="dropdown-content">
+              {plotData.map((option, index) => (
+                <div>
+                <a
+                  key={index}
+                  href="#"
+                  onClick={() => handleOptionClick(index)}
+                >
+                  Delete trace: {index}
+                </a>
+                </div>
+              ))}
+              <div>
+                <a
+                  key={-1}
+                  href="#"
+                  onClick={() => handleOptionClick(-1)}
+                >
+                  Delete All Traces
+                </a>
+            </div>
+          </div>
+        )}
+    </div>
       </main>
     </DashLayout>
   );
