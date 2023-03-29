@@ -79,13 +79,13 @@ const Metrics: FC = () => {
           </label>
           <input
             ref={srcRef}
-            className={`${styles.panelSrcInput}`}
+            className='h-10 text-lg bg-slate-800 text-white p-3 rounded-md border border-slate-700 shadow shadow-slate-500'
             type="text"
             placeholder="Grafana iframe 'src' attribute"
           />
           <button
             onClick={() => addPanel()}
-            className={`${styles.btnAddPanel}`}
+            className="bg-gradient-to-r from-slate-800 via-slate-500 to-slate-800 p-2 mt-6 mb-3 w-25 rounded-md cursor-pointer text-sky-300 hover:text-white hover:scale-105 font-medium transition-all shadow-md shadow-amber-600"
           >
             Add Panel
           </button>
