@@ -1,13 +1,10 @@
-import Head from 'next/head';
 import Layout from './layout';
-import styles from './home/home.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
   return (
     <Layout>
-      {/* <main className={styles.homeContainer}> */}
       <main className=" flex flex-col items-center p-18 h-full w-full max-w-screen-2xl mt-20">
         <div className="relative">
           <div className="absolute inset-0 bg-orange-300 rounded-full blur-3xl"></div>
@@ -19,8 +16,6 @@ export default function Home() {
             className="relative border-none bg-none"
           />
         </div>
-        {/* <h1 className={styles.welcomeText}>Welcome to strAPI!</h1> */}
-        {/* <h1 className=" text-5xl cursor-pointer hover:text-blue-400"> */}
         <h1 className="text-6xl pt-8">
           Welcome to Str<span className=" text-amber-600 font-normal">API</span>
           !
