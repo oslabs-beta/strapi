@@ -30,6 +30,7 @@ const Metrics: FC = () => {
     getData();
   }, []);
 
+  // adds a new panel to the dashboard
   const addPanel = async (): Promise<void> => {
     // console.log(srcRef.current.value);
     const body = {
@@ -47,7 +48,7 @@ const Metrics: FC = () => {
       throw new Error('Unable to add iframe src.');
     }
   };
-
+  // deletes a panel from the dashboard
   const deletePanel = async (id: any): Promise<void> => {
     //console.log("this is the id of the panel to deleted: ", id);
     const body = {
