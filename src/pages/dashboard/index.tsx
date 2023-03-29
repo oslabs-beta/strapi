@@ -51,35 +51,35 @@ const index = () => {
     title: {
       text: 'Response Latency',
       font: {
-        color: 'white'
+        color: 'white',
       },
-  },
+    },
     xaxis: {
       title: {
         text: 'Percentile',
         font: {
-          color: 'white'
+          color: 'white',
         },
       },
       tickmode: 'array',
       tickvals: [0, 90, 99],
       ticktext: ['0%', '90%', '99%'],
       tickfont: {
-        color: '#fff'
+        color: '#fff',
       },
       font: {
-        color: 'white'
+        color: 'white',
       },
     },
     yaxis: {
       title: {
         text: 'Latency (milliseconds)',
         font: {
-          color: 'white'
+          color: 'white',
         },
       },
       tickfont: {
-        color: '#fff'
+        color: '#fff',
       },
     },
     legend: {
@@ -87,7 +87,7 @@ const index = () => {
       x: 0,
       y: -0.15,
       font: {
-        color: 'white'
+        color: 'white',
       },
       orientation: 'h',
     },
@@ -99,7 +99,7 @@ const index = () => {
     plot_bgcolor: 'transparent',
     paper_bgcolor: 'transparent',
     responsive: true,
-    autosize: true, 
+    autosize: true,
     height: 800,
     // margin: {t: 0, r: 0, b: 0, l: 0},
   };
@@ -263,7 +263,7 @@ const index = () => {
   };
 
   return (
-    <DashLayout >
+    <DashLayout>
       <Head>
         <title>Dashboard</title>
       </Head>
@@ -399,7 +399,8 @@ const index = () => {
             </button>
             <button
               onClick={() => startTest()}
-              className=" bg-gradient-to-r from-slate-800 via-slate-500 to-slate-800 p-2 mt-6 mb-3 rounded-md cursor-pointer text-sky-300 hover:text-white hover:scale-105 font-medium transition-all shadow-md shadow-amber-600"
+              className="bg-gradient-to-r from-slate-800 via-slate-500 to-slate-800 p-2 mt-6 mb-3 rounded-md cursor-pointer text-sky-300 hover:text-white hover:scale-105 font-medium transition-all shadow-md shadow-amber-600"
+              type="button"
             >
               Start Test
             </button>
@@ -448,17 +449,23 @@ const index = () => {
             })}
           </ul>
         </section>
-        <div className='w-10/12'>
+        <div className="w-10/12">
           <div>
             <MyChart data={plotData} layout={layout} />
           </div>
           <br></br>
           <div className="dropdown">
-            <button className="p-2 mt-6 mb-3 rounded-md cursor-pointer text-red-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-sky-300" onClick={manuallyRequestPlotData}>
+            <button
+              className="p-2 mt-6 mb-3 rounded-md cursor-pointer text-red-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-sky-300"
+              onClick={manuallyRequestPlotData}
+            >
               Request Plot Data Manually
             </button>
-            <br />            
-            <button className="p-2 mt-3 mb-6 rounded cursor-pointer text-red-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-sky-300" onClick={revealDropdownOptions}>
+            <br />
+            <button
+              className="p-2 mt-3 mb-6 rounded cursor-pointer text-red-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-sky-300"
+              onClick={revealDropdownOptions}
+            >
               Remove Traces
             </button>
             {showDropdown && (
@@ -476,7 +483,12 @@ const index = () => {
                   </div>
                 ))}
                 <div>
-                  <a className="p-2 mt-3 rounded-md cursor-pointer text-sky-300 hover:text-white font-medium transition-all shadow shadow-amber-600" key={-1} href="#" onClick={() => handleOptionClick(-1)}>
+                  <a
+                    className="p-2 mt-3 rounded-md cursor-pointer text-sky-300 hover:text-white font-medium transition-all shadow shadow-amber-600"
+                    key={-1}
+                    href="#"
+                    onClick={() => handleOptionClick(-1)}
+                  >
                     Delete All Traces
                   </a>
                 </div>
