@@ -203,8 +203,8 @@ const index = () => {
     //starts async function retryGetHistogramData() after setTimeout
     setTimeout(async () => {
       await retryGetHistogramData();
-    }, (constants.testDuration + 0.5) * 1000);
-  };
+    }, (constants.testDuration * 1000)
+  )};
 
   //after test has been executed, the result.txt file will be read and scrape the necessary data to be input in plotly. will test once every second for 60 seconds.
   async function retryGetHistogramData(maxRetries = 60, delay = 1000) {
