@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './panel.module.css';
 
 type PanelProps = {
   url: string;
@@ -13,13 +12,23 @@ const Panel = ({ url, index, deletePanel }: PanelProps): JSX.Element => {
       <button
         id={index.toString()}
         onClick={(e: any) => deletePanel(e.target.id)}
-        className={styles.btnDelete}
+        className={
+          'p-2 mt-3 mb-6 rounded cursor-pointer text-red-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-sky-300'
+        }
       >
         Remove Panel
       </button>
-      <iframe src={url} className={styles.panel}></iframe>
+      <iframe
+        src={url}
+        className=" w-full h-96 border-none rounded-xl"
+      ></iframe>
     </div>
   );
 };
-
+/**
+ *   width: 100%;
+  height: 400px;
+  border: none;
+  border-radius: 10px;
+ */
 export default Panel;
