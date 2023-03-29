@@ -25,10 +25,5 @@ const Panel = ({ url, index, deletePanel }: PanelProps): JSX.Element => {
     </div>
   );
 };
-/**
- *   width: 100%;
-  height: 400px;
-  border: none;
-  border-radius: 10px;
- */
+
 export default Panel;
