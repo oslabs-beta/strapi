@@ -1,11 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './sidebar.module.css';
 import utilStyles from '../../src/styles/utils.module.css';
 
 const Sidebar = () => {
   return (
-    <nav className=" p-4 shrink-0 h-full w-1/5 max-w-xs flex flex-col items-start gap-4">
+    <nav className=" grow p-4 shrink-0 h-full w-1/5 max-w-xs flex flex-col items-start gap-4 bg-stone-500/[.2] rounded-3xl m-8 outline outline-1 outline-slate-700 bg-opacity-50 shadow-cyan-500/10x">
       <p className=" text-2xl font-light">Navigation Panel</p>
       <Link
         className=""

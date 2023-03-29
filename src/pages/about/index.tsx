@@ -9,7 +9,7 @@ const index = () => {
         <div className="p-10 ">
           <h1 className="text-center text-5xl">About Strapi</h1>
           <p className={styles.aboutText}>
-            Strapi is designed to be a free and open-source alternative to
+            StrAPI is designed to be a free and open-source alternative to
             load-test your API routes within Docker Containers
           </p>
           <p className={styles.aboutText}>
@@ -18,13 +18,13 @@ const index = () => {
             should be relatively easy.
           </p>
           <p className={styles.aboutText}>
-            That's where strAPI comes in! strAPI is a light-weight program that
+            That's where StrAPI comes in! StrAPI is a light-weight program that
             allows you to visualize and test your Docker API routes, free of
             charge with peace of mind that everything is working as intended!
           </p>
         </div>
         <div className="mt-10">
-          <h1 className="text-center text-5xl">Why strapi is the best</h1>
+          <h1 className="text-center text-5xl">Why StrAPI stands out</h1>
           <ul className="columns-2">
             <li className="p-10 text-center">
               <h3 className="text-amber-400">Cost Optimization</h3>

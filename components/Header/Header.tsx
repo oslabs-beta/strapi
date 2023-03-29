@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const Header = () => {
   return (
-    <header className=" flex justify-between w-full p-4 shadow-lg shadow-pink mb-4">
+    <header className=" flex bg-transparent/[0.05] justify-between shadow shadow-lg shadow-black w-full p-4 mb-4">
       <Link href="/" className=" flex justify-between items-center gap-4">
         <Image src="/logo.png" alt="strAPI logo" width={70} height={70} />
         <h1 className=" text-4xl hover:text-sky-300">

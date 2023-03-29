@@ -37,7 +37,6 @@ export default function Histogram() {
     );
     // Find the data rows and extract the values
     const postValues = lines[endOfValuesIndex].trim().split(/\s+/);
-    // console.log('dataLines: ', postValues);
 
     // Find the data rows and extract the values
     const dataLines = lines.slice(headingLineIndex + 2, endOfValuesIndex - 1);
@@ -47,15 +46,11 @@ export default function Histogram() {
       console.log(values);
       yValues.push(parseFloat(values[0]));
       xValues.push(parseFloat(values[1]));
-      // totalCount.push(parseFloat(values[2]));
-      // percentileRank.push(parseFloat(values[3]));
     });
     console.log('xValues: ', xValues);
     console.log('yValues: ', yValues);
-    // console.log('totalCount: ', totalCount);
-    // console.log('percentileRank: ', percentileRank);
 
-    // // Create the histogram chart
+    // Create the histogram chart
     const plotData = [
       {
         x: xValues,
@@ -66,15 +61,5 @@ export default function Histogram() {
       },
     ];
   });
-  // console.log(chartRef);
-  // return chartRef;
 }
 const result = Histogram();
-
-
-
-// Next, create a trace object with the x and y values
-
-// Create a data array with the trace object
-
-// Finally, create a layout object with any additional styling or configuration options
