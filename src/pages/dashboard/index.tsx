@@ -125,7 +125,7 @@ const index = () => {
       headers: { 'Content-Type': 'Application/JSON' },
     });
     const data = await res.json();
-    console.log('data from getTraces: ', data);
+
     // NOTE: we are using a .json file as our storage, so we also need to parse the file contents using JSON.parse()
     const graphTraces: Number[] = JSON.parse(data);
     setPlotData(graphTraces);
@@ -176,9 +176,6 @@ const index = () => {
 
   //executes stress test run by Wrk2
   const startTest = async (): Promise<void> => {
-    console.log('constants: ', constants);
-    console.log('params: ', params);
-
     //creates bash file through utilizing constants to create wrk2 bash command run in terminal
     const responseBash = await fetch('/api/createBash', {
       method: 'POST',
@@ -203,24 +200,21 @@ const index = () => {
     //starts async function retryGetHistogramData() after setTimeout
     setTimeout(async () => {
       await retryGetHistogramData();
-    }, (constants.testDuration * 1000)
-  )};
+    }, constants.testDuration * 1000);
+  };
 
   //after test has been executed, the result.txt file will be read and scrape the necessary data to be input in plotly. will test once every second for 60 seconds.
   async function retryGetHistogramData(maxRetries = 60, delay = 1000) {
     let currentRetry = 0;
-    console.log('currentRetry: inner', currentRetry);
+
     while (currentRetry < maxRetries) {
-      console.log('currentRetry: outer', currentRetry);
       try {
         const response = await getHistogramData();
         if (response.plotData.length > 0) {
-          console.log('response: ', response);
           addTrace(response.plotData[0]);
           return;
         }
       } catch (error) {
-        console.error(`Error on retry ${currentRetry + 1}:`, error);
         currentRetry++;
         if (currentRetry >= maxRetries) {
           throw new Error(`Failed after ${maxRetries} retries`);
@@ -471,10 +465,9 @@ const index = () => {
             {showDropdown && (
               <div className="flex flex-wrap">
                 {plotData.map((option, index) => (
-                  <div className="mb-7">
+                  <div key={index} className="mb-7">
                     <a
                       className="mr-3 p-2 mt-6 rounded-md cursor-pointer text-red-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-sky-300"
-                      key={index}
                       href="#"
                       onClick={() => handleOptionClick(index)}
                     >

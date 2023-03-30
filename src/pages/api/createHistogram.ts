@@ -10,53 +10,52 @@ export default async function histogram(
   try {
     fs.readFile('result.txt', (err, data) => {
       if (err) throw err;
-      console.log('data: ',data);
-  
+
       const yValues = [];
       const xValues = [];
+
       // Split the data into an array of lines
       const dataStr = data.toString();
-      if(!dataStr || dataStr.length === 0) {
-        return res.status(200).json({plot});
+      if (!dataStr || dataStr.length === 0) {
+        return res.status(200).json({ plot });
       }
       const lines = dataStr.split('\n');
+
       // Find the column headings index
       const headingLineIndex = lines.findIndex((line) =>
         line.startsWith('       Value ')
       );
-  
+
       // Find the column endings index
       const endOfValuesIndex = lines.findIndex((line) =>
         line.startsWith('#[Mean')
       );
-  
+
       // Find the data rows and extract the values
       const postValues = lines[endOfValuesIndex].trim().split(/\s+/);
-  
+
       // Find the data rows and extract the values
       const dataLines = lines.slice(headingLineIndex + 2, endOfValuesIndex - 1);
-  
+
       const histogramData = dataLines.map((line) => {
         const values = line.trim().split(/\s+/);
-        // console.log(values);
         yValues.push(parseFloat(values[0]));
         xValues.push(parseFloat(values[1]) * 100);
       });
-  
+
       // random rgb color generator
-      function randomColor () {
+      function randomColor() {
         let r = Math.floor(Math.random() * 255);
         let g = Math.floor(Math.random() * 255);
         let b = Math.floor(Math.random() * 255);
-        while(r > 220 && g > 220 && b > 220) {
-          console.log("r g b: ", r,g,b);
+        while (r > 220 && g > 220 && b > 220) {
           r = Math.floor(Math.random() * 255);
           g = Math.floor(Math.random() * 255);
           b = Math.floor(Math.random() * 255);
         }
         return `rgb(${r}, ${g}, ${b})`;
       }
-      
+
       const obj = {
         x: xValues,
         y: yValues,
@@ -65,12 +64,12 @@ export default async function histogram(
         hovertemplate: 'X: %{x}%<br>Y: %{y}ms',
         marker: { color: randomColor() },
       };
-      
+
       plot.push(obj);
-      console.log('plot: ', plot);
-      res.status(200).json({plot});
+
+      res.status(200).json({ plot });
     });
-  } catch(error) {
+  } catch (error) {
     res.status(500).json({ message: 'Error occurred', error: error.message });
   }
 }

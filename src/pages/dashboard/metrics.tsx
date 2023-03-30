@@ -31,7 +31,6 @@ const Metrics: FC = () => {
 
   // adds a new panel to the dashboard
   const addPanel = async (): Promise<void> => {
-    // console.log(srcRef.current.value);
     const body = {
       newUrl: srcRef?.current?.value,
     };
@@ -49,7 +48,6 @@ const Metrics: FC = () => {
   };
   // deletes a panel from the dashboard
   const deletePanel = async (id: any): Promise<void> => {
-    
     const body = {
       urlIndex: Number(id),
     };
@@ -66,7 +64,6 @@ const Metrics: FC = () => {
     }
   };
 
-
   return (
     <DashLayout>
       <main className="grid grid-cols-2 w-full gap-8 p-12 overflow-y-auto">
@@ -74,12 +71,10 @@ const Metrics: FC = () => {
           <h1 className="col-span-2 p-0 text-2.5xl">Live System Metrics:</h1>
           <p className="text-lg my-4">Courtesy of Grafana &copy;</p>
 
-          <label className="my-4 pt-2">
-            Add Grafana Metric Panel:
-          </label>
+          <label className="my-4 pt-2">Add Grafana Metric Panel:</label>
           <input
             ref={srcRef}
-            className='h-10 text-lg bg-slate-800 text-white p-3 rounded-md border border-slate-700 shadow shadow-slate-500'
+            className="h-10 text-lg bg-slate-800 text-white p-3 rounded-md border border-slate-700 shadow shadow-slate-500"
             type="text"
             placeholder="Grafana iframe 'src' attribute"
           />

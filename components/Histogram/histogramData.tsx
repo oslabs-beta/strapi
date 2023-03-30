@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState } from 'react';
 // import Plotly from 'plotly-nodejs';
 
 export default function Histogram() {
@@ -9,7 +9,7 @@ export default function Histogram() {
     xaxis: {
       title: 'X Axis Label',
       tickvals: [90, 99, 99.9],
-      ticktext: ['90%','99%','99.9%',],
+      ticktext: ['90%', '99%', '99.9%'],
     },
     yaxis: {
       title: 'Y Axis Label',
@@ -22,10 +22,10 @@ export default function Histogram() {
     const yValues = [];
     const xValues = [];
     const dataStr = data.toString();
-    console.log(dataStr)
+
     // Split the data into an array of lines
     const lines = dataStr.split('\n');
-    console.log('lines: ', lines);
+
     // Find the column headings
     const headingLineIndex = lines.findIndex((line) =>
       line.startsWith('       Value ')
@@ -43,12 +43,10 @@ export default function Histogram() {
 
     const histogramData = dataLines.map((line) => {
       const values = line.trim().split(/\s+/);
-      console.log(values);
+
       yValues.push(parseFloat(values[0]));
       xValues.push(parseFloat(values[1]));
     });
-    console.log('xValues: ', xValues);
-    console.log('yValues: ', yValues);
 
     // Create the histogram chart
     const plotData = [
@@ -57,7 +55,7 @@ export default function Histogram() {
         y: yValues,
         type: 'scatter',
         mode: 'lines+markers',
-        marker: {color: 'red'},
+        marker: { color: 'red' },
       },
     ];
   });
