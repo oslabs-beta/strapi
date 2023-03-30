@@ -27,7 +27,7 @@
     <img src="https://camo.githubusercontent.com/8f3f5208a529b452e4d92cb13e7b180e956df8618002324039eb704826d84316/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50726f6d6574686575732d4536353232433f7374796c653d666f722d7468652d6261646765266c6f676f3d50726f6d657468657573266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt="Prometheus" style="max-width: 100%">
   </a>
   <div>
-   <a href="https://tailwindcss.com/" rel="nofollow" className="">
+   <a href="https://tailwindcss.com/" rel="nofollow">
     <img src="https://camo.githubusercontent.com/ec8056bddf659d21de39b358d9786e56731cd767117e091348411666a5e7eee6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7461696c77696e646373732d2532333338423241432e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d7461696c77696e642d637373266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind" style="max-width: 100%">
   </a>
   </div>
