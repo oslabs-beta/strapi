@@ -12,6 +12,8 @@ module.exports = {
     extend: {
       colors: {
         midnight: 'rgb(18, 16, 99)',
+        darkblue: 'rgb(1,19,37)',
+        pracblack: 'rgb(0,0,14)',
       },
       boxShadow: {
         'sm-right': '2px 5px 5px 0 rgba(200, 200, 200, 0.5)',

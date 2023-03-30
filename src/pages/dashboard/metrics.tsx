@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import DashLayout from './layout';
-import styles from './dashboard.module.css';
 import Panel from '../../../components/Panel/Panel';
 import { FC } from 'react';
 
@@ -30,8 +29,8 @@ const Metrics: FC = () => {
     getData();
   }, []);
 
+  // adds a new panel to the dashboard
   const addPanel = async (): Promise<void> => {
-    // console.log(srcRef.current.value);
     const body = {
       newUrl: srcRef?.current?.value,
     };
@@ -47,9 +46,8 @@ const Metrics: FC = () => {
       throw new Error('Unable to add iframe src.');
     }
   };
-
+  // deletes a panel from the dashboard
   const deletePanel = async (id: any): Promise<void> => {
-    //console.log("this is the id of the panel to deleted: ", id);
     const body = {
       urlIndex: Number(id),
     };
@@ -68,23 +66,21 @@ const Metrics: FC = () => {
 
   return (
     <DashLayout>
-      <main className={styles.metricsContainer}>
-        <section className={styles.info}>
-          <h1 className={styles.pageTitle}>Live System Metrics:</h1>
-          <p className={styles.credit}>Courtesy of Grafana &copy;</p>
+      <main className="grid grid-cols-2 w-full gap-8 p-12 overflow-y-auto">
+        <section className="col-span-2 flex flex-col justify-start">
+          <h1 className="col-span-2 p-0 text-2.5xl">Live System Metrics:</h1>
+          <p className="text-lg my-4">Courtesy of Grafana &copy;</p>
 
-          <label className={styles.addPanelLabel}>
-            Add Grafana Metric Panel:
-          </label>
+          <label className="my-4 pt-2">Add Grafana Metric Panel:</label>
           <input
             ref={srcRef}
-            className={`${styles.panelSrcInput}`}
+            className="h-10 text-lg bg-slate-800 text-white p-3 rounded-md border border-slate-700 shadow shadow-slate-500"
             type="text"
             placeholder="Grafana iframe 'src' attribute"
           />
           <button
             onClick={() => addPanel()}
-            className={`${styles.btnAddPanel}`}
+            className="bg-gradient-to-r from-slate-800 via-slate-500 to-slate-800 p-2 mt-6 mb-3 w-25 rounded-md cursor-pointer text-sky-300 hover:text-white hover:scale-105 font-medium transition-all shadow-md shadow-amber-600"
           >
             Add Panel
           </button>
@@ -110,12 +106,3 @@ const Metrics: FC = () => {
 };
 
 export default Metrics;
-
-/*
-[
-  "http://localhost:4000/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&from=1678802384870&to=1678813184870&panelId=77",
-  "http://localhost:4000/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&from=1678715094713&to=1678725894713&panelId=9",
-  "http://localhost:4000/d-solo/rYdddlPWj/node-exporter-full?from=1678732293535&to=1678743093535&orgId=1&panelId=60"
-]
-
-*/

@@ -11,9 +11,7 @@ const Layout = ({ children }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo.ico" />
       </Head>
-      <div
-        className=" flex flex-col items-center w-full h-full relative bg-gradient-to-b from-midnight to-zinc-900  mix-blend-overlay overflow-y-auto"
-      >
+      <div className=" flex flex-col items-center w-full h-screen relative bg-gradient-to-b from-darkblue via-darkblue to-black overflow-y-auto">
         <Header />
         {children}
       </div>
