@@ -465,10 +465,9 @@ const index = () => {
             {showDropdown && (
               <div className="flex flex-wrap">
                 {plotData.map((option, index) => (
-                  <div className="mb-7">
+                  <div key={index} className="mb-7">
                     <a
                       className="mr-3 p-2 mt-6 rounded-md cursor-pointer text-red-300 hover:text-white hover:scale-105 font-medium transition-all shadow shadow-sky-300"
-                      key={index}
                       href="#"
                       onClick={() => handleOptionClick(index)}
                     >
