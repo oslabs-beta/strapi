@@ -78,7 +78,7 @@
    - If you are testing POST requests, format the body of the request in JSON format with key-value pairs.
 7. After all required parameters are input, hit "Add Method" to include method on the test.
 8. After all desired methods added, hit "Start Test" to begin testing.
-![Alt Text](/public/run-first-test.gif)
+   ![Alt Text](/public/run-first-test.gif)
 
 ### Viewing Test Results
 
@@ -86,11 +86,12 @@
 2. Subsequent tests will be added to the graph, allowing you to compare the performance of different endpoints and tests.
 3. Traces can be removed individually or all at once by clicking the Remove Traces button.
 4. If the trace is not automatically displayed on the graph after the test is complete, click the "Request Plot Data Manually" button to display the trace.
-![Alt Text](/public/run-multiple-tests.gif)
+   ![Alt Text](/public/run-multiple-tests.gif)
 5. StrAPI supports Grafana integration. To view Grafana panels click on Grafana Metrics in the left panel.
 6. In the input field, enter the grafana iframe url and click "Add Panel".
 7. To remove a panel, click on the "Remove Panel" button above the panel.
-![Alt Text](/public/grafana-metrics.png)
+   ![Alt Text](/public/grafana-metrics.png)
+
 ### Future Plans
 
 - Customize Grafana and Prometheus containers to work with StrAPI by configuring docker compose.
