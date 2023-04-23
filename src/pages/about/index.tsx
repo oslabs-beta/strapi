@@ -60,7 +60,7 @@ const index = () => {
         <div className="p-8">
           <h1 className="text-center text-5xl m-4">Installation</h1>
           <div className="relative flex justify-center gap-5 items-center">
-            {/* <h4>Github Read Me</h4> */}
+            {/* <h4> Github Read Me </h4> */}
             <Image
               src="/github-mark.png"
               alt="github logo"
