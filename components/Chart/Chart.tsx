@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 import { PlotParams } from 'react-plotly.js';
-import { getHistogramData } from '../../wrk_lua/getHistogramData';
 
 const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 

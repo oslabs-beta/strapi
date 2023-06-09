@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Histogram from '../../../components/Histogram/histogramData';
 import fs from 'fs';
 
 export default async function histogram(
@@ -30,14 +29,11 @@ export default async function histogram(
       const endOfValuesIndex = lines.findIndex((line) =>
         line.startsWith('#[Mean')
       );
-
-      // Find the data rows and extract the values
-      const postValues = lines[endOfValuesIndex].trim().split(/\s+/);
-
+      
       // Find the data rows and extract the values
       const dataLines = lines.slice(headingLineIndex + 2, endOfValuesIndex - 1);
 
-      const histogramData = dataLines.map((line) => {
+      dataLines.map((line) => {
         const values = line.trim().split(/\s+/);
         yValues.push(parseFloat(values[0]));
         xValues.push(parseFloat(values[1]) * 100);
