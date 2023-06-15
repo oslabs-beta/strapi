@@ -1,10 +1,7 @@
-import React from 'react';
-
 export const getHistogramData = async () => {
   let plotData = [];
-  let layout = {};
   // fetch data from the database through the api
-  const response = await fetch('/api/createHistogram')
+  await fetch('/api/createHistogram')
     .then((res) => res.json())
     .then((data) => {
       if (data.plot.length === 0 || !data) {
@@ -16,6 +13,5 @@ export const getHistogramData = async () => {
   // return the plot data for the chart, this is a single trace
   return {
     plotData: plotData,
-    // layout: layout,
   };
 };

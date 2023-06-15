@@ -56,7 +56,7 @@ export default async function panels(
 
       const allTraces = JSON.parse(tracesDELETE);
       const newTraces = allTraces.filter(
-        (trace: string, index: number) => traceIndex != index
+        (_: string, index: number) => traceIndex != index
       );
 
       await fs.writeFile(
