@@ -4,44 +4,7 @@ import { PlotlyChartContext } from '../index';
 import MyChart from '../../../../components/Chart/Chart';
 
 export const PlotlyChart = () => {
-  const { plotData, setPlotData, setIsLoading, plotLayout, showDropdown, setShowDropdown } = useContext(PlotlyChartContext)
-  const addTrace = async (trace): Promise<void> => {
-    const body = {
-      newTrace: trace,
-    };
-  
-    try {
-      await fetch('/api/histogramCache', {
-        method: 'POST',
-        headers: { 'Content-Type': 'Application/JSON' },
-        body: JSON.stringify(body),
-      });
-      // Fetches the updated list of traces from the server
-      getTraces();
-    } catch (err) {
-      throw new Error('Unable to add trace.');
-    }
-  };
-  
-  // fetches data from /api/histogramCache.ts
-  const getTraces = async (): Promise<void> => {
-    const res = await fetch('/api/histogramCache', {
-      method: 'GET',
-      headers: { 'Content-Type': 'Application/JSON' },
-    });
-    const data = await res.json();
-
-    // NOTE: we are using a .json file as our storage, so we also need to parse the file contents using JSON.parse()
-    const graphTraces: Number[] = JSON.parse(data);
-    setPlotData(graphTraces);
-    setIsLoading(false);
-  };
-
-  // runs on initial page render to render plotter
-  useEffect(() => {
-    setIsLoading(true);
-    getTraces();
-  }, []);
+  const { plotData, plotLayout, showDropdown, setShowDropdown, addTrace, getTraces } = useContext(PlotlyChartContext)
 
   //reveal dropdown options. toggle show/hide
   const revealDropdownOptions = () => {

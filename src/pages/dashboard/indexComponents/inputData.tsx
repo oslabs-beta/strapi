@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { InputDataContext } from "../index";
-import { startTest } from "../methods/startTest";
 
 export const InputData = () => {
   //tailwind styling
   const inputStyle = 'h-10 text-lg bg-slate-800 text-white p-3 rounded-md border border-slate-700 shadow shadow-slate-500';
   
-  const { constants, setConstants, params, setParams, isPost, setIsPost, ratioSum, setRatioSum, methods, setMethods } = useContext(InputDataContext);
+  const { constants, setConstants, params, setParams, isPost, setIsPost, ratioSum, setRatioSum, methods, setMethods, startTest } = useContext(InputDataContext);
 
   //add params into methods array
   const addMethod = () => {
