@@ -69,3 +69,9 @@ export default async function histogram(
     res.status(500).json({ message: 'Error occurred', error: error.message });
   }
 }
+
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+}

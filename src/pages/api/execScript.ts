@@ -1,11 +1,30 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction;
 import type { NextApiRequest, NextApiResponse } from 'next';
-import runScript from '../../../wrk_lua/execScripts';
+import { exec } from 'child_process';
 
 export default async function scripts(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  await runScript(req, res);
+  exec('ls', (err) => {
+    if (err) {
+      console.error(`Error running script: ${err}`);
+      res.status(500).send('Error running script');
+      return;
+    }
+  });
+  exec('chmod +x execWrk2Script.sh', (err) => {
+    if (err) {
+      console.error(`Error running script: ${err}`);
+      res.status(500).send('Error running script');
+      return;
+    }
+  });
+  exec('./execWrk2Script.sh', (err) => {
+    if (err) {
+      console.error(`Error running script: ${err}`);
+      res.status(500).send('Error running script');
+      return;
+    }
+  });
   res.status(200).send('running script');
 }

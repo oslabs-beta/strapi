@@ -6,7 +6,7 @@ import { CurrentMethods } from './indexComponents/currentMethods';
 import { PlotlyChart } from './indexComponents/plotlyChart';
 import { testingConstants, params, methods } from './types/types';
 import { plotLayout } from './constants/constants';
-import { getHistogramData } from '../../../wrk_lua/getHistogramData';
+import { getHistogramData } from '../../../methods/getHistogramData';
 
 export const InputDataContext = createContext(null);
 export const CurrentMethodsContext = createContext(null);
@@ -45,7 +45,7 @@ const index = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   
   //executes stress test run by Wrk2
-  const startTest = async (constants, methods): Promise<void> => {
+  const startTest = async (constants:testingConstants, methods:[params]): Promise<void> => {
     //creates bash file through utilizing constants to create wrk2 bash command run in terminal
     await fetch('/api/createBash', {
       method: 'POST',
