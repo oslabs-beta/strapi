@@ -9,7 +9,7 @@ type ChartProps = {
   layout: PlotParams['layout'];
 };
 const config = {
-  autoSize: true,
+  autosizable: true,
 };
 const MyChart: React.FC<ChartProps> = ({ data, layout }) => {
   return (
