@@ -21,6 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "methods/getHistogramData.js"  ],
+    "methods/getHistogramData.ts"
+  ],
   "exclude": ["node_modules"]
 }
