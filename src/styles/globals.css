@@ -59,6 +59,9 @@ body {
   background-color: transparent;
 }
 
-input:-webkit-autofill {
-  background-color: transparent;
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #1e293b inset !important;
+  -webkit-text-fill-color: white !important;
 }

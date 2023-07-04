@@ -21,8 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "../wrk_lua/execScripts.ts",
-    "../wrk_lua/luaFileGenerator.js"
+    "methods/getHistogramData.ts"
   ],
   "exclude": ["node_modules"]
 }

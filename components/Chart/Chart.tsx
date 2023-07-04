@@ -2,14 +2,17 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import { PlotParams } from 'react-plotly.js';
 
-const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
+const Plot = dynamic(() => import('react-plotly.js'), { 
+  ssr: false,
+  loading: () => <p>Loading...</p>
+});
 
 type ChartProps = {
   data: PlotParams['data'];
   layout: PlotParams['layout'];
 };
 const config = {
-  autoSize: true,
+  autosizable: true,
 };
 const MyChart: React.FC<ChartProps> = ({ data, layout }) => {
   return (

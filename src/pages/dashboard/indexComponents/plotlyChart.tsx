@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { getHistogramData } from '../../../../wrk_lua/getHistogramData';
+import { getHistogramData } from '../../../../methods/getHistogramData';
 import { PlotlyChartContext } from '../index';
 import MyChart from '../../../../components/Chart/Chart';
 

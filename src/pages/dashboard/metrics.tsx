@@ -6,7 +6,6 @@ import { FC } from 'react';
 const Metrics: FC = () => {
   const [urls, setUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [urlSrc, setUrlSrc] = useState('');
 
   const srcRef = useRef<HTMLInputElement>(null);
 
