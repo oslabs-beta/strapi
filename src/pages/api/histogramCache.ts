@@ -46,7 +46,7 @@ export default async function panels(
       // if traceIndex is -1, delete all traces
       if (traceIndex === -1) {
         await fs.writeFile(dbUrl + '/histogramCache.json', JSON.stringify([]));
-        return res.status(200).json({ message: 'Successfully reseted graph.' });
+        return res.status(200).json({ message: 'Successfully reset graph.' });
       }
 
       const tracesDELETE = await fs.readFile(
@@ -56,7 +56,7 @@ export default async function panels(
 
       const allTraces = JSON.parse(tracesDELETE);
       const newTraces = allTraces.filter(
-        (trace: string, index: number) => traceIndex != index
+        (_: string, index: number) => traceIndex != index
       );
 
       await fs.writeFile(
@@ -64,7 +64,7 @@ export default async function panels(
         JSON.stringify(newTraces)
       );
       
-      return res.status(200).json({ message: 'Successfully reseted graph.' });
+      return res.status(200).json({ message: 'Successfully reset graph.' });
 
     default:
   }

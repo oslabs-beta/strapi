@@ -1,6 +1,6 @@
 # Welcome to StrAPI!
 
-## StrAPI - the free and open-source application for stress-testing RESTful API routes!
+## StrAPI - the free and open-source application for stress-testing RESTful API routes! (Now Docker Compatible!)
 
 ---
 
@@ -48,6 +48,9 @@ Strapi focuses on simplifying the creation and visualization of real-time perfor
 ![Alt Text](/public/run-multiple-tests.gif)
 
 ## Getting Started
+
+### Docker Installation:
+- For Docker usage, please see <a href = 'https://hub.docker.com/r/choopi/strapi'>Docker Repo</a> to pull and run Docker image.
 
 ### Prerequisites:
 
