@@ -1,13 +1,18 @@
-# Welcome to StrAPI!
-
-## StrAPI - the free and open-source application for stress-testing RESTful API routes! (Now Docker Compatible!)
-
----
-
-<div align="center">
-  <img src="./public/logo_512.png">
-</div>
+<h1 align="center" >Strapi</h1>
 <div align="center" style="display: flex; justify-content: center; align-items: center; gap: 25px;">
+  <div align="center">
+  
+  <img src="./public/logo_512.png" width="250px">
+  <h1>
+    <a href="https://osawards.com/react/">React Performance Tool</a>
+  </h1>
+        
+  <h4>Free and open-source application for stress-testing RESTful API routes!</h4>
+
+  *(Now Docker Compatible!)*
+    <br>
+  <br>
+</div>
   <!-- Next.js -->
   <img src="https://img.shields.io/badge/-Next.js-black?logo=next.js&logoColor=white&style=flat" alt="Next.js">
   
