@@ -50,7 +50,7 @@ This section is dedicated to robust HTTP route testing and benchmarking. It offe
 ### Viewing:
 Strapi focuses on simplifying the creation and visualization of real-time performance metrics. By seamlessly integrating Grafana with Prometheus data, we harness Grafana's extensive library of templates designed for stress testing metrics and data exporters. Prometheus collects essential metrics, enabling the creation of a performance observability dashboard within Grafana.
 
-![Alt Text](/public/run-multiple-tests.gif)
+![Alt Text](/public/grafana-metrics.png)
 
 ## Getting Started
 
@@ -94,7 +94,7 @@ Strapi focuses on simplifying the creation and visualization of real-time perfor
   
 
 ### Viewing Test Results
-![Alt Text](/public/grafana-metrics.png)
+![Alt Text](/public/run-multiple-tests.gif)
 1. After the test is complete, a trace will be generated and displayed below on the latency graph.
 2. Subsequent tests will be added to the graph, allowing you to compare the performance of different endpoints and tests.
 3. Traces can be removed individually or all at once by clicking the Remove Traces button.
