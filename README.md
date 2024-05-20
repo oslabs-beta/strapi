@@ -1,48 +1,56 @@
-# Welcome to StrAPI!
-
-## StrAPI - the free and open-source application for stress-testing RESTful API routes! (Now Docker Compatible!)
-
----
-
-<div align="center">
-  <img src="./public/logo_512.png">
-</div>
+<h1 align="center" >Strapi</h1>
 <div align="center" style="display: flex; justify-content: center; align-items: center; gap: 25px;">
-  <a href="https://nextjs.org/" rel="nofollow">
-    <img src="https://camo.githubusercontent.com/b7395b00d152dc8f19cec61f582369bd580e31b8ed93d34646ec43aa675baa7c/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e6578742d626c61636b3f7374796c653d666f722d7468652d6261646765266c6f676f3d6e6578742e6a73266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="NextJs" style="max-width: 100%">
-  </a>
-  <a href="https://reactjs.org/" rel="nofollow">
-    <img src="https://camo.githubusercontent.com/ab4c3c731a174a63df861f7b118d6c8a6c52040a021a552628db877bd518fe84/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72656163742d2532333230323332612e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374266c6f676f436f6c6f723d253233363144414642" data-canonical-src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="ReactJs" style="max-width: 100%">
-  </a>
-   <a href="https://typescriptlang.org/" rel="nofollow">
-    <img src="https://camo.githubusercontent.com/ee71fcc1aa3d059265517741dffc4161922fd744377e7a5f07c43381d0aa9aac/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f747970657363726970742d2532333030374143432e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d74797065736372697074266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="Typescript" style="max-width: 100%">
-  </a>
-  <a href="https://grafana.org/" rel="nofollow">
-    <img src="https://camo.githubusercontent.com/e93d04df009a3d062fe60a1deae634f36c47af5d0462f775b0b6cdfcd2dee1a1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f67726166616e612d2532334634363830302e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d67726166616e61266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/grafana-%23F46800.svg?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana" style="max-width: 100%">
-  </a>
-  <a href="https://docker.com/" rel="nofollow">
-    <img src="https://camo.githubusercontent.com/6b7f701cf0bea42833751b754688f1a27b6090fdf90bf2b226addff01be817f0/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f636b65722d2532333064623765642e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d646f636b6572266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" style="max-width: 100%">
-  </a>
-   <a href="https://prometheus.io/" rel="nofollow">
-    <img src="https://camo.githubusercontent.com/8f3f5208a529b452e4d92cb13e7b180e956df8618002324039eb704826d84316/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50726f6d6574686575732d4536353232433f7374796c653d666f722d7468652d6261646765266c6f676f3d50726f6d657468657573266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt="Prometheus" style="max-width: 100%">
-  </a>
-  <div>
-   <a href="https://tailwindcss.com/" rel="nofollow">
-    <img src="https://camo.githubusercontent.com/ec8056bddf659d21de39b358d9786e56731cd767117e091348411666a5e7eee6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7461696c77696e646373732d2532333338423241432e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d7461696c77696e642d637373266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind" style="max-width: 100%">
-  </a>
-  </div>
-  <a href="https://www.lua.org/" rel="nofollow">
-    <img src="/public/lua.png" alt="lua" style="max-height: 28px">
-  </a>
+  <div align="center">
+  
+  <img src="./public/logo_512.png" width="250px">
+  <h1>
+    <a href="https://osawards.com/react/">React Performance Tool</a>
+  </h1>
+        
+  <h4>Free and open-source application for stress-testing RESTful API routes!</h4>
+
+  *(Now Docker Compatible!)*
+    <br>
+  <br>
+</div>
+  <!-- Next.js -->
+  <img src="https://img.shields.io/badge/-Next.js-black?logo=next.js&logoColor=white&style=flat" alt="Next.js">
+  
+  <!-- React -->
+  <img src="https://img.shields.io/badge/-React_JS-61DAFB?logo=react&logoColor=white&style=flat" alt="React">
+  <!-- TypeScript -->
+  <img src="https://img.shields.io/badge/-TypeScript-007ACC?logo=typescript&logoColor=white&style=flat" alt="TypeScript">
+  <!-- Grafana -->
+  <img src="https://img.shields.io/badge/-Grafana-F46800?logo=grafana&logoColor=white&style=flat" alt="Grafana">
+  <!-- Docker -->
+  <img src="https://img.shields.io/badge/-Docker-2496ED?logo=docker&logoColor=white&style=flat" alt="Docker">
+  <!-- Prometheus -->
+  <img src="https://img.shields.io/badge/-Prometheus-E6522C?logo=prometheus&logoColor=white&style=flat" alt="Prometheus">
+  <!-- Lua -->
+  <img src="https://img.shields.io/badge/-Lua-2C2D72?logo=lua&logoColor=white&style=flat" alt="Lua">
+  <!-- Tailwind CSS -->
+  <img src="https://img.shields.io/badge/-Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white&style=flat" alt="Tailwind CSS">
 </div>
 
 ---
 
 ## Table of Contents
 
+- [Features](#features)
 - [Getting Started](#getting-started)
 - [Viewing Test Results](#viewing-test-results)
 - [Future Plans](#future-plans)
+## Features
+
+### Testing:
+This section is dedicated to robust HTTP route testing and benchmarking. It offers customizable configurations and employs the Wrk2 benchmarking tool, streamlining performance evaluation. Wrk2 data is extracted and visualized with Plotly, enabling quick assessment of response times and ensuring the application meets service level expectations.
+
+ ![Alt Text](/public/run-first-test.gif)
+
+### Viewing:
+Strapi focuses on simplifying the creation and visualization of real-time performance metrics. By seamlessly integrating Grafana with Prometheus data, we harness Grafana's extensive library of templates designed for stress testing metrics and data exporters. Prometheus collects essential metrics, enabling the creation of a performance observability dashboard within Grafana.
+
+![Alt Text](/public/run-multiple-tests.gif)
 
 ## Getting Started
 
@@ -60,9 +68,7 @@
     cd wrk2
     make
     ```
-    - A file named wrk will be generated in that directory, rename wrk to wrk2, and then run
-    ```
-    sudo cp wrk2 /usr/local/bin
+    sudo cp wrk /usr/local/bin
     ```
 - Make sure your server is up and running. If you are in development mode, the server URL should be something like `http://localhost:1234`, with the 1-2-3-4 being your server's port number.
 - If your application is running in a Docker container, make sure to have your local port exposed or access to the container's ip address, and ensure you are referencing the right port number.
@@ -83,19 +89,18 @@
    - If you are testing POST requests, format the body of the request in JSON format with key-value pairs.
 7. After all required parameters are input, hit "Add Method" to include method on the test.
 8. After all desired methods added, hit "Start Test" to begin testing.
-   ![Alt Text](/public/run-first-test.gif)
+  
 
 ### Viewing Test Results
-
+![Alt Text](/public/grafana-metrics.png)
 1. After the test is complete, a trace will be generated and displayed below on the latency graph.
 2. Subsequent tests will be added to the graph, allowing you to compare the performance of different endpoints and tests.
 3. Traces can be removed individually or all at once by clicking the Remove Traces button.
 4. If the trace is not automatically displayed on the graph after the test is complete, click the "Request Plot Data Manually" button to display the trace.
-   ![Alt Text](/public/run-multiple-tests.gif)
 5. StrAPI supports Grafana integration. To view Grafana panels click on Grafana Metrics in the left panel.
 6. In the input field, enter the grafana iframe url and click "Add Panel".
 7. To remove a panel, click on the "Remove Panel" button above the panel.
-   ![Alt Text](/public/grafana-metrics.png)
+   
 
 ### Future Plans
 
