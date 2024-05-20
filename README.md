@@ -68,9 +68,7 @@ Strapi focuses on simplifying the creation and visualization of real-time perfor
     cd wrk2
     make
     ```
-    - A file named wrk will be generated in that directory, rename wrk to wrk2, and then run
-    ```
-    sudo cp wrk2 /usr/local/bin
+    sudo cp wrk /usr/local/bin
     ```
 - Make sure your server is up and running. If you are in development mode, the server URL should be something like `http://localhost:1234`, with the 1-2-3-4 being your server's port number.
 - If your application is running in a Docker container, make sure to have your local port exposed or access to the container's ip address, and ensure you are referencing the right port number.
